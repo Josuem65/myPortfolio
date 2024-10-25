@@ -1,0 +1,38 @@
+/*If display is of a regular size or a wide monitor, center popupMain right in the middle of the display*/
+/*if display is in portrait mode, center it clsoer to the top*/
+/*for now, just center popupMain in the center of the display with a higher z-index than the rest of the elements except the nav component*/
+.popupMain {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center; 
+  align-items: center;
+  display: flex;
+  position: absolute;
+  top: 10vh;
+  left: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+}
+
+.hide {
+  display: none;
+  z-index: 1;
+  color: white;
+}
+
+.popupText {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 20vh;
+  z-index: 4;
+  backdrop-filter: blur(4.5px);
+  margin: auto;
+  padding: 0 10% 20% 10%;
+  background-color: rgb(218, 218, 218);
+}
+

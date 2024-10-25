@@ -1,0 +1,17 @@
+/* start the recommended CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* make mainNav stay at the top of the page even when scrolling down using the position: sticky key value*/
+.mainNav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #333;
+  z-index: 1000;
+  color: white;
+}

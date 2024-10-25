@@ -1,0 +1,25 @@
+.tilesMain {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: /*view width*/ 70%;
+    height: 30vh; 
+    border: 1px dotted rgb(21, 21, 21);
+}
+
+.tile {
+    border: 1px dashed rgb(158, 158, 158);
+    border-radius: 20px;
+    z-index: 3;
+    transform: scale(1);
+    transition: 0.5s;
+}
+
+.tile:hover {
+    transform: scale(1.2);
+    z-index: 1;
+    transition: 0.5s;
+}
+
