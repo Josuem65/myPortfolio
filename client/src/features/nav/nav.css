@@ -7,11 +7,17 @@
 
 
 /* make mainNav stay at the top of the page even when scrolling down using the position: sticky key value*/
+/*mainNav should contain its child elements in a row*/
+/* mainNav should center */
 .mainNav {
   position: fixed;
   top: 0;
   width: 100%;
+  height: 10vh;
   background-color: #333;
   z-index: 1000;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }

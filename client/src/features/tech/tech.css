@@ -1,5 +1,2 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+/* techMain class is a parent class with a max height of 15vh, it should contain its child elements in a row with no wrap*/
+/*techMain should contain and resize its image children to fit the parent container*/

@@ -1,6 +1,21 @@
 .App {
   text-align: center;
 }
+
+.logosDiv {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  max-height: 15vh;  
+}
+
+.logo {
+  max-height: 15vh;
+  max-width: 15vh;
+  border: 1px dotted gray;
+}
+
 /* 
 .App-logo {
   height: 40vmin;

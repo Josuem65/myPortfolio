@@ -8,26 +8,31 @@ const imageList = [
         {
             id: 1,
             name: 'React-Photo-Album',
+            url: 'https://josuem65.github.io/20-react-photo-album2/#/album/4',
             image: photoAlbum
         },
         {
             id: 2,
             name: 'React-Shopping-Cart',
+            url: 'https://josuem65.github.io/react-shopping-cart2/',
             image: shoppingCart
         },
         {
             id: 3,
             name: 'Calculator',
+            url: 'https://josuem65.github.io/15-calculator/',
             image: calculator
         },
         {
             id: 4,
             name: 'Memory Game',
+            url: 'https://josuem65.github.io/16-memory-UPDATE/',
             image: memoryGame
         },
         {
             id: 5,
             name: 'Skate Shop',
+            url: 'https://josuem65.github.io/4-CSS-sk8er-site/',
             image: skateShop
         }
     ];

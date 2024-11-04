@@ -8,8 +8,7 @@ import {
   incrementIfOdd,
   selectCount,
 } from './contentSlice';
-import styles from './content.css';
-import style from '../components.css';
+import contentList from '../../contentImgs.js'
 
 export function Content() {
   const count = useSelector(selectCount);
@@ -19,9 +18,12 @@ export function Content() {
   const incrementValue = Number(incrementAmount) || 0;
 
   return (
-    <div>
       <div className="contentMain">
         <h1>Content</h1>
+        <div className="content">
+          {contentList.map((item) => {
+            return <div className="contentTile" key={item.id}>{item.name}<img className="contentImg" src={item.image}/></div>
+          })}
       </div>
     </div>
   );
