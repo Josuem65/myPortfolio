@@ -28,8 +28,7 @@ export function Nav() {
   //   // go to top of the page without refreshing the page
   //   window.scrollTo(0, 0);
   // }
-  const handleHomeClick = () => {  // home click handler: working!
-    // popupStatus ? goToHome() : scrollToTop();
+  const handleHomeClick = () => { 
     window.scrollTo({ top: 0, behavior: 'smooth' });
     return popupStatus ? dispatch(togglePopup()) : null;
   }
@@ -39,7 +38,7 @@ export function Nav() {
     <div>
       <div className="mainNav">
         {navList.map((item) => {
-          return <div onClick={handleHomeClick}>{item}</div>
+          return <div onClick={handleHomeClick} className={item === 'myPortfolio' ? "navItem homeNav" : "navItem"}>{item}</div>
         })}
       </div>
     </div>

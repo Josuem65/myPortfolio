@@ -9,6 +9,7 @@ import { BuyMeACoffee } from './features/buyMeACoffee/BuyMeACoffee';
 import { Popup } from './features/popup/Popup';
 import './App.css';
 import './features/nav/nav.css';
+import './features/content/content.css';
 import './features/tiles/tiles.css';
 import './features/connections/connections.css';
 import './features/popup/popup.css';
