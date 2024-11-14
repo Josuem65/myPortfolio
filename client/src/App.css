@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  z-index: -1;
+  background-color: rgb(34, 34, 34);;
 }
 
 .logosDiv {
@@ -15,6 +17,7 @@
   max-width: 15vh;
   border: 1px dotted gray;
 }
+
 
 /* 
 .App-logo {
