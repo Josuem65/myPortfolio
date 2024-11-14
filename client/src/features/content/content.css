@@ -1,5 +1,26 @@
 /* start with recommended css reset */
+/* make contentMain contain content, and content contain contentTile img*/
+
 .contentMain {
-  margin-top: 10vh;
-  background-color: rgb(133, 91, 91)
+  margin-top: 3em;
+  width: auto;
+  height: 60vh;
+}
+
+/* make contentTile img stay contained within its parent div, contentImg's parent is .content*/
+
+.content {
+  width: 100%;
+  height: 100%;
+}
+
+.contentTile {
+  height: 100%;
+  width: 100%;
+}
+
+.contentTile img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }
