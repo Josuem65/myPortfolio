@@ -12,14 +12,12 @@
 /* on .tilesMain:hover, transform its children elements to scale down by 25%, also dim its children elements by 25%, exempt the */
 
 .tile {
-    /* border: 1px dashed rgb(158, 158, 158); */
     border-radius: 20px;
     transform: scale(.8);
     transition: 0.5s;
     cursor: pointer;
     margin: 0 12px;
     color: rgb(228, 228, 228);
-    /* border: 1px dashed rgb(218, 196, 200); */
 }
 
 
@@ -44,3 +42,46 @@
     transition: .4s;
 }
 
+@media (pointer: coarse) {
+
+    /* Styles to apply specifically for touch screens */
+  
+    /* button { 
+  
+      padding: 20px;
+  
+    } */
+  
+  }
+
+  @media (max-width: 768px) and (pointer: coarse) {
+    /* make tilesMain's children scrollable horizontally*/
+    /* tilesMain must contain content within its set height*/
+    .tilesMain {
+        display: block;
+        padding: 0;
+        width:100%;
+        height: 95vh; 
+        border: 1px dotted rgb(168, 92, 92);
+        overflow-x: scroll;
+    }
+
+    .tile {
+        display: inline-block;
+        border: 1px dashed rgb(158, 158, 158);
+        height: 100%;
+        width: 75%;
+        border-radius: 20px;
+        transform: scale(.8);
+        transition: 0.5s;
+        cursor: pointer;
+        margin: 0 10px;
+        color: rgb(228, 228, 228);
+    }
+    /* .tile:hover {
+        transform: scale(.9);
+        z-index: 3;
+        transition: 0.4s;
+        margin: 0 15px;
+    } */
+  }
