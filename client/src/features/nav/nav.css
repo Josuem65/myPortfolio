@@ -38,3 +38,10 @@
   margin-right: 60%;
   
 }
+
+@media (max-width: 768px) and (pointer: coarse) {
+  .mainNav {
+    height: 1.8em;
+    font-size: small;
+  }
+}
