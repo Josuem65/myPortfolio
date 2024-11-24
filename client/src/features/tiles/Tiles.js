@@ -12,23 +12,24 @@ export function Tiles() {
   // const tileParentRef = useRef(null);
   // const [tileEntries, setTileEntries] = useState([]);
 
-  //get all elements with the class name 'tile' and store them in the variable tileEntries
-  // const tileEntries = document.getElementsByClassName('tile');
-
   useEffect(() => { 
     console.log('tileEntries:', tileRefs.current);
-    const observer = new IntersectionObserver((entry) => {
-      console.log('entry: ', entry);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        console.log('entry: ', entry)
+        entry.target.className = entry.isIntersecting ? 'tile transformTile' : 'tile';
+      });
     }, 
     {
-      root: null,
-      rootMargin: '0px',
-      threshold: 1.0
+      // root: null,
+      rootMargin: '0px -25%',
+      // threshold: 1.0
     });
     tileRefs.current.forEach(tile => {
       observer.observe(tile);
     });
-  }, [])  // onClick={() => dispatch(togglePopup())}   //taken off div with className 'tile' for now.
+  }, []) 
+  // onClick={() => dispatch(togglePopup())}   //taken off div with className 'tile' for now.
   // Instead of opening a new tab on onClick{openInNewTab()}, you can open a popup browser window. refer to 'https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_screenx'
 
   const openInNewTab = (url) => {
