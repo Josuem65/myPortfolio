@@ -8,22 +8,27 @@ export function Tiles() {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
-  const tileRef = useRef(null);
+  const tileRefs = useRef([]);
+  // const tileParentRef = useRef(null);
+  // const [tileEntries, setTileEntries] = useState([]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      console.log('entries', entries);
-      entries.forEach(entry => {
-       //code that checks if element in intersecting with atleast 25% of its root element (parent element)
-       console.log(`entry is visible: ${entry, entry.isVisible}`);
-      });
-      //observe all the elements that have tileRef as a reference
-    observer.observe(tileRef.current);
+  //get all elements with the class name 'tile' and store them in the variable tileEntries
+  // const tileEntries = document.getElementsByClassName('tile');
+
+  useEffect(() => { 
+    console.log('tileEntries:', tileRefs.current);
+    const observer = new IntersectionObserver((entry) => {
+      console.log('entry: ', entry);
+    }, 
+    {
+      root: null,
+      rootMargin: '0px',
+      threshold: 1.0
     });
-  }, []);
-  
-
-  // onClick={() => dispatch(togglePopup())}   //taken off div with className 'tile' for now.
+    tileRefs.current.forEach(tile => {
+      observer.observe(tile);
+    });
+  }, [])  // onClick={() => dispatch(togglePopup())}   //taken off div with className 'tile' for now.
   // Instead of opening a new tab on onClick{openInNewTab()}, you can open a popup browser window. refer to 'https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_screenx'
 
   const openInNewTab = (url) => {
@@ -37,8 +42,8 @@ window.addEventListener('resize', () => {
 });
   return (
       <div className="tilesMain">
-        {imageList.map((item) => {
-          return <div className="tile" ref={tileRef} onClick={() => openInNewTab(item.url)} key={item.id}>{item.name}<img class="tileImg" src={item.image}/></div>
+        {imageList.map((item, index) => {
+          return <div className="tile" ref={(element) => tileRefs.current[index] = element} onClick={() => openInNewTab(item.url)} key={item.id}>{item.name}<img class="tileImg" src={item.image}/></div>
         })}
       </div>
   );
