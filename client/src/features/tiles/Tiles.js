@@ -43,7 +43,7 @@ window.addEventListener('resize', () => {
   return (
       <div className="tilesMain">
         {imageList.map((item) => {
-          return <div className="tile" ref={targetRef} onClick={() => openInNewTab(item.url)} key={item.id}>{item.name}<img class="tileImg" src={item.image}/></div>
+          return <div className="tile"  onClick={() => openInNewTab(item.url)} key={item.id}>{item.name}<img class="tileImg" src={item.image}/></div>
         })}
       </div>
   );
