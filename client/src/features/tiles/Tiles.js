@@ -8,20 +8,16 @@ export function Tiles() {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
-  // const targetRef = useRef(null);
+  const tileRef = useRef(null);
 
-  // useEffect(() => {
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+       //code that checks if element in intersecting with atleast 25% of its root element (parent element)
+      });
 
-  //   const observer = new IntersectionObserver((entries) => {
-  //     entries.forEach(entry => {
-  //      //add a targetRef to each of the entries
-  //       entry.target.classList.add('visible');
-  //       console.log(entry.target);
-  //     });
-  //   },)
-  //   observer.observe(targetRef.current);
-    
-  //   });
+    });
+  });
 
 
   // onClick={() => dispatch(togglePopup())}   //taken off div with className 'tile' for now.
@@ -32,18 +28,14 @@ export function Tiles() {
   }
 
   //Determine the midpoint of the viewport vertically using window.innerHeight / 2. In this case calculate the midpoint of the viewport horizontally.
-//   Find closest element:
-// Loop through each list element, calculate its distance from the center, and keep track of the element with the smallest distance.
-// Scroll into view:
-// Use scrollIntoView on the closest element with the block: 'center' option to align it to the center of the viewport. 
-//you can use JavaScript's scrollIntoView method with the behavior: 'smooth' option to scroll smoothly to the element.
+
 window.addEventListener('resize', () => {
   console.log('window resized');
 });
   return (
       <div className="tilesMain">
         {imageList.map((item) => {
-          return <div className="tile"  onClick={() => openInNewTab(item.url)} key={item.id}>{item.name}<img class="tileImg" src={item.image}/></div>
+          return <div className="tile" ref={tileRef} onClick={() => openInNewTab(item.url)} key={item.id}>{item.name}<img class="tileImg" src={item.image}/></div>
         })}
       </div>
   );
