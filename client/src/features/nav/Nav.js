@@ -38,7 +38,7 @@ export function Nav() {
     <div>
       <div className="mainNav">
         {navList.map((item) => {
-          return <div onClick={handleHomeClick} className={item === 'myPortfolio' ? "navItem homeNav" : "navItem"}>{item}</div>
+          return <div onClick={handleHomeClick} className={item === 'myPortfolio' ? "navItem homeNav" : "navItem"} key={Math.random(32)}>{item}</div>
         })}
       </div>
     </div>

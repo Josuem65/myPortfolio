@@ -12,13 +12,16 @@ export function Tiles() {
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
+      console.log('entries', entries);
       entries.forEach(entry => {
        //code that checks if element in intersecting with atleast 25% of its root element (parent element)
+       console.log(`entry is visible: ${entry, entry.isVisible}`);
       });
-
+      //observe all the elements that have tileRef as a reference
+    observer.observe(tileRef.current);
     });
-  });
-
+  }, []);
+  
 
   // onClick={() => dispatch(togglePopup())}   //taken off div with className 'tile' for now.
   // Instead of opening a new tab on onClick{openInNewTab()}, you can open a popup browser window. refer to 'https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_screenx'
