@@ -17,12 +17,23 @@ export function Tiles() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         console.log('entry: ', entry)
-        entry.target.className = entry.isIntersecting ? 'tile transformTile' : 'tile';
+        const targetChildren = entry.target.childNodes;
+        if (entry.isIntersecting) {
+          entry.target.className = 'tile transformTile';
+          targetChildren[0].className = 'transformImg';
+          targetChildren[1].className = 'tileImg transformImg';
+        }
+        else {
+          entry.target.className = 'tile';
+          targetChildren[0].className = '';
+          targetChildren[1].className = 'tileImg';
+        }
+        // entry.target.className = entry.isIntersecting ? 'tile transformTile' : 'tile';
       });
     }, 
     {
       // root: null,
-      rootMargin: '0px -25%',
+      rootMargin: '0px -50%',
       // threshold: 1.0
     });
     tileRefs.current.forEach(tile => {
@@ -44,7 +55,7 @@ window.addEventListener('resize', () => {
   return (
       <div className="tilesMain">
         {imageList.map((item, index) => {
-          return <div className="tile" ref={(element) => tileRefs.current[index] = element} onClick={() => openInNewTab(item.url)} key={item.id}>{item.name}<img class="tileImg" src={item.image}/></div>
+          return <div className="tile" ref={(element) => tileRefs.current[index] = element} onClick={() => openInNewTab(item.url)} key={item.id}><p>{item.name}</p><img class="tileImg" src={item.image}/></div>
         })}
       </div>
   );
