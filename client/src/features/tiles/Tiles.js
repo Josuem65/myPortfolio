@@ -9,93 +9,64 @@ export function Tiles() {
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
   const tileRefs = useRef([]);
+  const boxRef = useRef(null);
   // const tileParentRef = useRef(null);
   // const [tileEntries, setTileEntries] = useState([]);
 
-  useEffect(() => { 
-    // console.log('tileEntries:', tileRefs.current);
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        // console.log('entry: ', entry);
-        console.log('entry.target: ', entry.target);
-        const tile = entry.target;
-        console.log('entry.target: ', tile);
-        // console.log('entries: ', entries);
-        console.log('entry is intersecting: ', entry.isIntersecting);
-        if(entry.isIntersecting) {
-          // Why is entry.target [object HTMLDivElement] and not the actual div element? after entering this conditional statement?
-          // console.log(`entry.target: ${entry.target}`); // [object HTMLDivElement]
-          // console.log(`entry.target: ${tile}`); // [object HTMLDivElement]
-
-          // console.log(`entry.target.childNodes: ${entry.target.childNodes}`); // [object NodeList]
-
-          console.log(`Conditional went through, entry: ${tile} is intersecting`);
-          let isScrolling = false;
-
-          window.addEventListener('scroll', () => {
-            console.log('Scrolling has started');
-            isScrolling = true;
-            clearTimeout(scrollFnct);
-          
-            scrollFnct = setTimeout(() => {
-              // Your code to execute when scrolling ends
-              console.log('Scrolling has ended');
-              isScrolling = false;
-            }, 10000); // Adjust the timeout as needed
-            while(entry.isIntersecting && isScrolling) {
-              console.log(`entry: ${entry.target} is intersecting`);
-              const elementRect = entry.target.getBoundingClientRect();
-              const parentRect = entry.target.parentNode.getBoundingClientRect();
-              
-              const elementCenterX = elementRect.left + elementRect.width / 2;
-              const parentCenterX = parentRect.left + parentRect.width / 2;
-              const distance = Math.abs(elementCenterX - parentCenterX);
-              
-              const maxDistance = parentRect.width / 2;
-              const minScale = 1;
-              const maxScale = 1.2; //adjust as needed
-              
-              const scaleFactor = maxScale - (distance / maxDistance) * (maxScale - minScale);
-          console.log(`distance: ${distance}, scaleFactor: ${scaleFactor}`)
-
-          const targetChildren = entry.target.childNodes;
-          // targetChildren[0].style.transform = `scale(${scaleFactor})`;
-          // targetChildren[0].style.transform = 'transition: transform 0.3s';
-          // targetChildren[1].style.transform = `scale(${scaleFactor})`;
-          // targetChildren[1].style.transform = 'transition: transform 0.3s';
-
-          // if (entry.isIntersecting) {
-            // entry.target.className = 'tile transformTile';
-            // targetChildren[0].style.transform = `scale(${scaleFactor})`;
-            targetChildren[1].style.transition = `transform 0.3s`;
-            targetChildren[1].style.transform = `scale(${scaleFactor})`;
-            console.log(`img styel: ${targetChildren[1].style.transform}`);
-          }
-        });
-        }
-        console.log('entry.target: ', entry.target);
-        // }
-        // else {
-        //   entry.target.className = 'tile';
-        //   targetChildren[0].className = '';
-        //   targetChildren[1].className = 'tileImg';
-        // }
-
-        // entry.target.className = entry.isIntersecting ? 'tile transformTile' : 'tile';
-      });
-     }, 
-    {
-      // root: null,
-      rootMargin:  `0px -${window.innerWidth - (window.innerWidth / 2) + 100}px`,
-      // threshold: 1.0
-    });
+    useEffect(() => { 
     const screenWidth = window.innerWidth;
     if(screenWidth < 769) {
+      const thresholdList = [];
+      for (let i=0; i<=1; i+=0.01) {
+        thresholdList.push(i);
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const imgP = entry.target.children[0];
+          const img = entry.target.children[1];
+          let prevRatio = 0.0;
+
+          if(entry.intersectionRatio > prevRatio) {
+            //This will be the calculation of the ratio as it gets closer to the center of the root bounding box.
+            // entryChildren[1].classList.add('transform_img');
+            // entry.target.classList.add('transform_Img');
+            // transform: scale(1.2);
+            /* border-radius: 35px; */
+            // z-index: 3;
+            // transition: 0.3s ease;
+            // box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.5); 
+            img.style.trasform = `scale(${1})`; //x is the calculation of ratio as it gets closer to the center of the root bounding box.
+            console.log('entry.target: ', entry.target);
+            console.log('entry rootBounds: ', entry.rootBounds);
+            // entry.target.className = 'tile transformTile';
+            // entry.target.style.transform = 'translateX(0px)';
+            // entry.target.style.transition = 'transform 1s';
+          } else {
+            //This will be the calculation of the ratio as it gets further from the center of the root bounding box.
+            // entryChildren[1].classList.remove('transformImg');
+            // entry.target.style.transform = 'translateX(100px)';
+            // entry.target.style.transition = 'transform 1s';
+          }
+          prevRatio = entry.intersectionRatio;
+        });
+      }, 
+      {
+        // root: null,
+        rootMargin: `0px -${screenWidth - (screenWidth/2 + 130)}px 0px -${screenWidth - (screenWidth/2 + 130)}px`, // '0px 0px 0px 0px'
+        threshold: thresholdList,
+      },
+    );    
+    console.log(observer);
       tileRefs.current.forEach(tile => {
         observer.observe(tile);
       });
     }
-  }, []) 
+    //get the object of the element with a class of 'redBox'
+    const redBox = boxRef.current;
+    // console.log('redBox: ', redBox);
+    redBox.style.width =260 + 'px';
+    redBox.style.left = ((window.innerWidth/2) - 130) + 'px';
+  }, [])  
   // onClick={() => dispatch(togglePopup())}   //taken off div with className 'tile' for now.
   // Instead of opening a new tab on onClick{openInNewTab()}, you can open a popup browser window. refer to 'https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_screenx'
 
@@ -108,11 +79,13 @@ export function Tiles() {
 window.addEventListener('resize', () => {
   console.log('window resized');
 });
+
   return (
       <div className="tilesMain">
         {imageList.map((item, index) => {
-          return <div className="tile" ref={(element) => tileRefs.current[index] = element} onClick={() => openInNewTab(item.url)} key={item.id}><p>{item.name}</p><img class="tileImg" src={item.image}/></div>
+          return <div className="tile" ref={(element) => tileRefs.current[index] = element} onClick={() => openInNewTab(item.url)} key={item.id}><p>{item.name}</p><img className={'tileImg'} src={item.image}/></div>
         })}
+        <div className='redBox' ref={boxRef}></div>
       </div>
   );
 }
