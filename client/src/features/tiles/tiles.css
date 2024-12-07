@@ -82,20 +82,20 @@
 
     .tileImg {
         border-radius: 25px;
-        border: 1px solid rgb(45, 45, 155);
+        /* border: 1px solid rgb(45, 45, 155); */
         height: 425px;
         width: 100%;
         object-fit: cover;
-        transition: .5s;
+        transition: .1s ease;
     }
 
-    .transformImg {
+    /* .transformImg {
         transform: scale(1.2);
-        /* border-radius: 35px; */
+        border-radius: 35px;
         z-index: 3;
         transition: 0.3s ease;
         box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.5);      
-    }
+    } */
 /* redBox needs to have a negative z-index and have an display of absolute to represent the rootMargin in our intersectionObserver*/
     .redBox {
         position: absolute;

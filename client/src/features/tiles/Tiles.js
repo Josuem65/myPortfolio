@@ -15,7 +15,7 @@ export function Tiles() {
 
     useEffect(() => { 
       console.log('tileRefs', tileRefs);
-    const screenWidth = window.innerWidth;
+    const screenWidth = document.documentElement.clientWidth;
     if(screenWidth < 769) {
       const thresholdList = [];
       for (let i=0; i<=1; i+=0.01) {
@@ -25,50 +25,40 @@ export function Tiles() {
         
         entries.forEach(entry => {
           let prevRatio = entry.target.prevRatio;
+          const tile = entry.target;
           const imgP = entry.target.children[0];
           const img = entry.target.children[1];
-
-          if(entry.intersectionRatio > prevRatio) {
-            console.log('entry.target: ', entry.target);
-            console.log('entry.intersectionRatio is greater than prevRatio: ', entry.intersectionRatio, prevRatio);
-            //This will be the calculation of the ratio as it gets closer to the center of the root bounding box.
-            // transform: scale(1.2);
-            /* border-radius: 35px; */
-            // z-index: 3;
-            // transition: 0.3s ease;
-            // box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.5); 
-            img.style.trasform = `scale(${1})`; //x is the calculation of ratio as it gets closer to the center of the root bounding box.
-            // console.log('entry rootBounds: ', entry.rootBounds);
-            // entry.target.className = 'tile transformTile';
-            // entry.target.style.transform = 'translateX(0px)';
-            // entry.target.style.transition = 'transform 1s';
-          } else {
-            console.log('entry.target: ', entry.target);
-            console.log('entry.intersectionRatio is less than prevRatio: ', entry.intersectionRatio, prevRatio);
-            //This will be the calculation of the ratio as it gets further from the center of the root bounding box.
-            // entryChildren[1].classList.remove('transformImg');
-            // entry.target.style.transform = 'translateX(100px)';
-            // entry.target.style.transition = 'transform 1s';
-          }
-          entry.target.prevRatio = entry.intersectionRatio;
+          if(entry.isIntersecting) {
+            // img.classList.add('transformImg');
+            function scaleCalculation() {
+              let n = .2;
+              let x = 1 + (entry.intersectionRatio * n);
+              return x;
+            }
+            tile.classList.add('transformTile'); // this will change the margin, boxy shadow, and z-index of the tile.
+            img.style.transform = `scale(${scaleCalculation()})`;
+            entry.target.prevRatio = entry.intersectionRatio;
+          };
         });
-      }, 
-      {
-        // root: null,
-        rootMargin: `0px -${screenWidth - (screenWidth/2 + 130)}px 0px -${screenWidth - (screenWidth/2 + 130)}px`, // '0px 0px 0px 0px'
-        threshold: thresholdList,
-      },
-    );    
-    console.log(observer);
-      tileRefs.current.forEach(tile => {
-        observer.observe(tile);
-      });
+        console.log('screenWidth: ', screenWidth);
+        }, 
+
+        {
+          // root: null,
+          rootMargin: `0px -${screenWidth - (screenWidth/2 + 130)}px 0px -${screenWidth - (screenWidth/2 + 130)}px`, // '0px 0px 0px 0px'
+          threshold: thresholdList,
+        },
+      );    
+      console.log(observer);
+        tileRefs.current.forEach(tile => {
+          observer.observe(tile);
+        });
     }
     //get the object of the element with a class of 'redBox'
     const redBox = boxRef.current;
     // console.log('redBox: ', redBox);
     redBox.style.width =260 + 'px';
-    redBox.style.left = ((window.innerWidth/2) - 130) + 'px';
+    redBox.style.left = ((screenWidth/2) - 130) + 'px';
   }, [])  
   // onClick={() => dispatch(togglePopup())}   //taken off div with className 'tile' for now.
   // Instead of opening a new tab on onClick{openInNewTab()}, you can open a popup browser window. refer to 'https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_screenx'
