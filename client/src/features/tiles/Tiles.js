@@ -21,6 +21,7 @@ export function Tiles() {
       for (let i=0; i<=1; i+=0.01) {
         thresholdList.push(i);
       }
+      
       const observer = new IntersectionObserver((entries) => {
         
         entries.forEach(entry => {
@@ -30,13 +31,14 @@ export function Tiles() {
           const img = entry.target.children[1];
           if(entry.isIntersecting) {
             // img.classList.add('transformImg');
-            function scaleCalculation() {
-              let n = .2;
-              let x = 1 + (entry.intersectionRatio * n);
-              return x;
+            function scale(min, max) {
+              let n = min + (entry.intersectionRatio * max);
+              return n;
             }
             tile.classList.add('transformTile'); // this will change the margin, boxy shadow, and z-index of the tile.
-            img.style.transform = `scale(${scaleCalculation()})`;
+            img.style.transform = `scale(${scale(1, .2)})`;
+            console.log('entry.intersectionRatio: ', entry.intersectionRatio);
+            tile.style.margin = `auto ${scale(10, 10)}px`;
             entry.target.prevRatio = entry.intersectionRatio;
           };
         });
