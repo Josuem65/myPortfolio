@@ -8,6 +8,7 @@ export function Tiles() {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
+  // const tilesMain = useRef(null);
   const tileRefs = useRef([]);
   const boxRef = useRef(null);
   // const tileParentRef = useRef(null);
@@ -29,20 +30,48 @@ export function Tiles() {
           const tile = entry.target;
           const imgP = entry.target.children[0];
           const img = entry.target.children[1];
+          function scale(min, max) {
+            let n = min + (entry.intersectionRatio * max);
+            return n;
+          }
+
           if(entry.isIntersecting) {
-            // img.classList.add('transformImg');
-            function scale(min, max) {
-              let n = min + (entry.intersectionRatio * max);
-              return n;
-            }
+            //get element with class of tilesMain
+            const tilesMain = document.querySelector('.tilesMain');
+            let lastScrollX = tilesMain.scrollLeft;
+            console.log('lastScrollX: ', lastScrollX);
+            let currentScrollX;
+            // console.log('currentScrollX: ', currentScrollX);
+            
+            const detectScrollMomentum = () => {
+              currentScrollX = tilesMain.scrollLeft;
+              console.log('currentScrollX: ', currentScrollX);
+              const scrollSpeed = Math.abs(currentScrollX - lastScrollX);
+              console.log('scrollSpeed: ', scrollSpeed);
+              lastScrollX = currentScrollX;
+              console.log('lastScrollX: ', lastScrollX);
+
+              if(scrollSpeed < 5) { //adjust threshold as needed.
+                //Align the tile to the center of the screen.
+                console.log('what the fuck');
+                const viewportWidth = screenWidth;
+                const tileWidth = tile.offsetWidth;
+                const leftOffset = (viewportWidth - tileWidth) / 2;
+                // tile.style.left = `${leftOffset}px`;
+              } else {
+                console.log('what the fuck, else')
+                requestAnimationFrame(detectScrollMomentum);
+              }
+            };
+            detectScrollMomentum();
+
             tile.classList.add('transformTile'); // this will change the margin, boxy shadow, and z-index of the tile.
             img.style.transform = `scale(${scale(1, .2)})`;
-            console.log('entry.intersectionRatio: ', entry.intersectionRatio);
             tile.style.margin = `auto ${scale(10, 10)}px`;
             entry.target.prevRatio = entry.intersectionRatio;
           };
+          tile.classList.remove('transformTile'); // remove the transformTile class from the tile.
         });
-        console.log('screenWidth: ', screenWidth);
         }, 
 
         {
