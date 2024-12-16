@@ -8,7 +8,7 @@ export function Tiles() {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
-  // const tilesMain = useRef(null);
+  const tilesMainRef = useRef(null);
   const tileRefs = useRef([]);
   const boxRef = useRef(null);
   // const tileParentRef = useRef(null);
@@ -23,6 +23,14 @@ export function Tiles() {
         thresholdList.push(i);
       }
       
+      //get the element with the class of tilesMain and add a key of 'lastScroll' to it.
+      // T E S T I N G  T O  B E T T E R  U N D E R S T A N D  H O W  S C R O L L  W O R K S  W I T H  I N T E R S E C T I O N  O B S E R V E R
+      tilesMainRef.lastScroll = 0;
+      console.log('tilesMain', tilesMainRef);
+      let number = 0;
+      let secondNum = 0;
+      // E N  D  O F  T E S T I N G ^^^^
+
       const observer = new IntersectionObserver((entries) => {
         
         entries.forEach(entry => {
@@ -34,37 +42,11 @@ export function Tiles() {
             let n = min + (entry.intersectionRatio * max);
             return n;
           }
-
+          //replace a startingScroll variable for a key on the tile object.
+          // 
+          console.log(number++)
           if(entry.isIntersecting) {
-            //get element with class of tilesMain
-            const tilesMain = document.querySelector('.tilesMain');
-            let lastScrollX = tilesMain.scrollLeft;
-            console.log('lastScrollX: ', lastScrollX);
-            let currentScrollX;
-            // console.log('currentScrollX: ', currentScrollX);
-            
-            const detectScrollMomentum = () => {
-              currentScrollX = tilesMain.scrollLeft;
-              console.log('currentScrollX: ', currentScrollX);
-              const scrollSpeed = Math.abs(currentScrollX - lastScrollX);
-              console.log('scrollSpeed: ', scrollSpeed);
-              lastScrollX = currentScrollX;
-              console.log('lastScrollX: ', lastScrollX);
-
-              if(scrollSpeed < 5) { //adjust threshold as needed.
-                //Align the tile to the center of the screen.
-                console.log('what the fuck');
-                const viewportWidth = screenWidth;
-                const tileWidth = tile.offsetWidth;
-                const leftOffset = (viewportWidth - tileWidth) / 2;
-                // tile.style.left = `${leftOffset}px`;
-              } else {
-                console.log('what the fuck, else')
-                requestAnimationFrame(detectScrollMomentum);
-              }
-            };
-            detectScrollMomentum();
-
+            console.log(secondNum++)
             tile.classList.add('transformTile'); // this will change the margin, boxy shadow, and z-index of the tile.
             img.style.transform = `scale(${scale(1, .2)})`;
             tile.style.margin = `auto ${scale(10, 10)}px`;
@@ -87,9 +69,8 @@ export function Tiles() {
     }
     //get the object of the element with a class of 'redBox'
     const redBox = boxRef.current;
-    // console.log('redBox: ', redBox);
-    redBox.style.width =260 + 'px';
-    redBox.style.left = ((screenWidth/2) - 130) + 'px';
+    // redBox.style.width =260 + 'px';
+    // redBox.style.left = ((screenWidth/2) - 130) + 'px';
   }, [])  
   // onClick={() => dispatch(togglePopup())}   //taken off div with className 'tile' for now.
   // Instead of opening a new tab on onClick{openInNewTab()}, you can open a popup browser window. refer to 'https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_screenx'
@@ -110,11 +91,11 @@ const tileRefHandler = (element, index) => {
 }
 
   return (
-      <div className="tilesMain">
+      <div className="tilesMain" ref={tilesMainRef}>
         {imageList.map((item, index) => {
           return <div className="tile" ref={(element) => tileRefHandler(element, index)} onClick={() => openInNewTab(item.url)} key={item.id}><p>{item.name}</p><img className={'tileImg'} src={item.image}/></div>
         })}
-        <div className='redBox' ref={boxRef}></div>
+        {/* <div className='redBox' ref={boxRef}></div> */}
       </div>
   );
 }
