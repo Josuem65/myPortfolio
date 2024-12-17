@@ -23,9 +23,10 @@ export function Tiles() {
         thresholdList.push(i);
       }
       
-      //get the element with the class of tilesMain and add a key of 'lastScroll' to it.
+      //get the element with the class of tilesMain and add a key of 'lastScrollX' to it.
       // T E S T I N G  T O  B E T T E R  U N D E R S T A N D  H O W  S C R O L L  W O R K S  W I T H  I N T E R S E C T I O N  O B S E R V E R
-      tilesMainRef.lastScroll = 0;
+      tilesMainRef.lastScrollX = tilesMainRef.current.scrollLeft;
+      let currentScrollX;
       console.log('tilesMain', tilesMainRef);
       let number = 0;
       let secondNum = 0;
@@ -51,6 +52,23 @@ export function Tiles() {
             img.style.transform = `scale(${scale(1, .2)})`;
             tile.style.margin = `auto ${scale(10, 10)}px`;
             entry.target.prevRatio = entry.intersectionRatio;
+
+            const detectScrollMomentum = () => {
+              currentScrollX = tilesMainRef.current.scrollLeft;
+              const scrollSpeed = Math.abs(currentScrollX - tilesMainRef.lastScrollX);
+              tilesMainRef.lastScrollX = currentScrollX;
+              console.log('detectScrollMomentum is running', currentScrollX);
+
+              if(scrollSpeed < 5) { // Adjust threshold as needed.
+                console.log('scrolling speed less than 5')
+              } else if(entry.isIntersecting && scrollSpeed > 5) {
+                console.log('scrolling speed greater than 5')
+                requestAnimationFrame(detectScrollMomentum);
+              }
+            };
+
+            detectScrollMomentum();
+
           };
           tile.classList.remove('transformTile'); // remove the transformTile class from the tile.
         });
