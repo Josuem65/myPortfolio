@@ -4,7 +4,7 @@ import calculator from './calculator.png';
 import memoryGame from './memoryGame.png';
 import skateShop from './skateShop.png';
 
-const imageList = [
+const tileImgList = [
         {
             id: 1,
             name: 'React-Photo-Album',
@@ -36,7 +36,7 @@ const imageList = [
             image: skateShop
         }
     ];
-export default imageList;
+export default tileImgList;
 // {
 //     "images": [
 //         {

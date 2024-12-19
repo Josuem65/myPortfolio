@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCount } from './tilesSlice';
 import { togglePopup } from '../popup/popupSlice';
-import imageList from '../../images.js';
+import tileImgList from '../../images.js';
 
 export function Tiles() {
   const count = useSelector(selectCount);
@@ -26,49 +26,60 @@ export function Tiles() {
       //get the element with the class of tilesMain and add a key of 'lastScrollX' to it.
       // T E S T I N G  T O  B E T T E R  U N D E R S T A N D  H O W  S C R O L L  W O R K S  W I T H  I N T E R S E C T I O N  O B S E R V E R
       tilesMainRef.lastScrollX = tilesMainRef.current.scrollLeft;
-      let currentScrollX;
-      console.log('tilesMain', tilesMainRef);
-      let number = 0;
-      let secondNum = 0;
+      console.log('tilesMainRef.lastScrollX: ', tilesMainRef.lastScrollX);
+      let headTile = tileRefs.current[0];
+      headTile.currScrollX;
+      // console.log('tilesMainRef.lastScrollX: ', tilesMainRef.lastScrollX);
+      tilesMainRef.intersectingEntries = []; 
+
+      let scrollTimeOut;
+      const detectScrollMomentum = () => {
+        headTile.currScrollX = tilesMainRef.current.scrollLeft;
+        console.log('currScrollX: ', headTile.currScrollX);
+        const scrollSpeed = Math.abs(headTile.currScrollX - tilesMainRef.lastScrollX);
+        console.log('scrollSpeed: ', scrollSpeed);
+        tilesMainRef.lastScrollX = headTile.currScrollX;
+        console.log('tilesMainRef.lastScrollX: ', tilesMainRef.lastScrollX);
+
+        if(scrollSpeed < 3) {
+          console.log('scroll speed less than 3, scrollSpeed: ', scrollSpeed);
+          console.log('intersectingEntries: ', tilesMainRef.intersectingEntries)
+        } else if (scrollSpeed > 3) {
+          console.log('intersectingEntries: ', tilesMainRef.intersectingEntries);
+          requestAnimationFrame(detectScrollMomentum);
+        }
+      }
+      tilesMainRef.current.addEventListener('scroll', () => {
+        console.log('scrolling event fired');
+        clearTimeout(scrollTimeOut);
+        scrollTimeOut = setTimeout(detectScrollMomentum, 100); // Adjust the timeout as needed.
+      });
       // E N  D  O F  T E S T I N G ^^^^
 
       const observer = new IntersectionObserver((entries) => {
         
         entries.forEach(entry => {
-          let prevRatio = entry.target.prevRatio;
-          const tile = entry.target;
-          const imgP = entry.target.children[0];
+          const tile = entry.target; // the html itself
+          const imgP = entry.target.children[0]; // caption
           const img = entry.target.children[1];
+          
           function scale(min, max) {
             let n = min + (entry.intersectionRatio * max);
             return n;
           }
+
+          // console.log('intersectingEntries: ', tilesMainRef.intersectingEntries);
           //replace a startingScroll variable for a key on the tile object.
           // 
-          console.log(number++)
+          // console.log(`entry: ${imgP.innerText}, round: ${round < 5 ? round++ : round = 0}`);
           if(entry.isIntersecting) {
-            console.log(secondNum++)
             tile.classList.add('transformTile'); // this will change the margin, boxy shadow, and z-index of the tile.
             img.style.transform = `scale(${scale(1, .2)})`;
             tile.style.margin = `auto ${scale(10, 10)}px`;
-            entry.target.prevRatio = entry.intersectionRatio;
-
-            const detectScrollMomentum = () => {
-              currentScrollX = tilesMainRef.current.scrollLeft;
-              const scrollSpeed = Math.abs(currentScrollX - tilesMainRef.lastScrollX);
-              tilesMainRef.lastScrollX = currentScrollX;
-              console.log('detectScrollMomentum is running', currentScrollX);
-
-              if(scrollSpeed < 5) { // Adjust threshold as needed.
-                console.log('scrolling speed less than 5')
-              } else if(entry.isIntersecting && scrollSpeed > 5) {
-                console.log('scrolling speed greater than 5')
-                requestAnimationFrame(detectScrollMomentum);
-              }
-            };
-
-            detectScrollMomentum();
-
+            tilesMainRef.intersectingEntries.includes(tile) ? true : tilesMainRef.intersectingEntries.push(tile);
+          } else {
+            tilesMainRef.intersectingEntries = tilesMainRef.intersectingEntries.filter(currTile => currTile !== tile);
+            // console.log('intersectingEntries: ', tilesMainRef.intersectingEntries);
           };
           tile.classList.remove('transformTile'); // remove the transformTile class from the tile.
         });
@@ -105,12 +116,12 @@ window.addEventListener('resize', () => {
 
 const tileRefHandler = (element, index) => {
   tileRefs.current[index] = element;
-  tileRefs.current[index].prevRatio = 0;
+  // tileRefs.current[index].prevRatio = 0;
 }
 
   return (
       <div className="tilesMain" ref={tilesMainRef}>
-        {imageList.map((item, index) => {
+        {tileImgList.map((item, index) => {
           return <div className="tile" ref={(element) => tileRefHandler(element, index)} onClick={() => openInNewTab(item.url)} key={item.id}><p>{item.name}</p><img className={'tileImg'} src={item.image}/></div>
         })}
         {/* <div className='redBox' ref={boxRef}></div> */}
