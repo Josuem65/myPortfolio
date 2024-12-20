@@ -32,7 +32,7 @@ export function Tiles() {
       // console.log('tilesMainRef.lastScrollX: ', tilesMainRef.lastScrollX);
       tilesMainRef.intersectingEntries = []; 
 
-      let scrollTimeOut;
+      let scrollAnimationFrame;
       const detectScrollMomentum = () => {
         headTile.currScrollX = tilesMainRef.current.scrollLeft;
         console.log('currScrollX: ', headTile.currScrollX);
@@ -41,22 +41,43 @@ export function Tiles() {
         tilesMainRef.lastScrollX = headTile.currScrollX;
         console.log('tilesMainRef.lastScrollX: ', tilesMainRef.lastScrollX);
 
-        if(scrollSpeed < 3) {
-          console.log('scroll speed less than 3, scrollSpeed: ', scrollSpeed);
-          console.log('intersectingEntries: ', tilesMainRef.intersectingEntries)
-        } else if (scrollSpeed > 3) {
-          console.log('intersectingEntries: ', tilesMainRef.intersectingEntries);
-          requestAnimationFrame(detectScrollMomentum);
-        }
+        if(scrollSpeed <= 5) {
+          console.log('scroll speed <= 5, scrollSpeed: ', scrollSpeed);
+          //find the tile in the intersectingEntries array that is closest to the center of the viewport.
+          console.log('tilesMainRef.intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.innerText));
+            
+            const tileWithHighestRatio = tilesMainRef.intersectingEntries.reduce((prev, curr) => {
+              console.log('prev: ', prev);
+              const prevRatio = prev.intersectionRatio
+              console.log('prevRatio: ', prevRatio);
+              const currRatio = curr.intersectionRatio
+              console.log('currRatio: ', currRatio);
+              console.log(currRatio > prevRatio ? curr : prev);
+              return currRatio > prevRatio ? curr : prev;
+            });
+            console.log('Tile with highest intersecting ratio:', tileWithHighestRatio.innerText);
+            // stop the scroll animation frame.
+            if (scrollAnimationFrame) {
+              cancelAnimationFrame(scrollAnimationFrame);
+              scrollAnimationFrame = null;
+            }
+            
+          } else {
+            console.log('intersectingEntries: ', tilesMainRef.intersectingEntries);
+            scrollAnimationFrame = requestAnimationFrame(detectScrollMomentum);
+          }
       }
-      tilesMainRef.current.addEventListener('scroll', () => {
+      tilesMainRef.current.addEventListener('touchend', () => {
         console.log('scrolling event fired');
-        clearTimeout(scrollTimeOut);
-        scrollTimeOut = setTimeout(detectScrollMomentum, 100); // Adjust the timeout as needed.
+        if (scrollAnimationFrame) {
+          cancelAnimationFrame(scrollAnimationFrame);
+        }
+        scrollAnimationFrame = requestAnimationFrame(detectScrollMomentum);
       });
       // E N  D  O F  T E S T I N G ^^^^
 
       const observer = new IntersectionObserver((entries) => {
+        console.log('intersectingEntries: ', tilesMainRef.intersectingEntries);
         
         entries.forEach(entry => {
           const tile = entry.target; // the html itself
@@ -76,9 +97,13 @@ export function Tiles() {
             tile.classList.add('transformTile'); // this will change the margin, boxy shadow, and z-index of the tile.
             img.style.transform = `scale(${scale(1, .2)})`;
             tile.style.margin = `auto ${scale(10, 10)}px`;
-            tilesMainRef.intersectingEntries.includes(tile) ? true : tilesMainRef.intersectingEntries.push(tile);
+            if(!tilesMainRef.intersectingEntries.includes(tile)) {
+              tilesMainRef.intersectingEntries.push(tile);
+            }
+            console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.innerText));
           } else {
             tilesMainRef.intersectingEntries = tilesMainRef.intersectingEntries.filter(currTile => currTile !== tile);
+            console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.innerText));
             // console.log('intersectingEntries: ', tilesMainRef.intersectingEntries);
           };
           tile.classList.remove('transformTile'); // remove the transformTile class from the tile.
