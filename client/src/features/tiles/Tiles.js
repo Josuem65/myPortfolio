@@ -44,7 +44,7 @@ export function Tiles() {
         if(scrollSpeed <= 5) {
           console.log('scroll speed <= 5, scrollSpeed: ', scrollSpeed);
           //find the tile in the intersectingEntries array that is closest to the center of the viewport.
-          console.log('tilesMainRef.intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.innerText));
+          console.log('tilesMainRef.intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.target.innerText));
             
             const tileWithHighestRatio = tilesMainRef.intersectingEntries.reduce((prev, curr) => {
               console.log('prev: ', prev);
@@ -55,7 +55,7 @@ export function Tiles() {
               console.log(currRatio > prevRatio ? curr : prev);
               return currRatio > prevRatio ? curr : prev;
             });
-            console.log('Tile with highest intersecting ratio:', tileWithHighestRatio.innerText);
+            console.log('Tile with highest intersecting ratio:', tileWithHighestRatio.target.innerText);
             // stop the scroll animation frame.
             if (scrollAnimationFrame) {
               cancelAnimationFrame(scrollAnimationFrame);
@@ -63,7 +63,7 @@ export function Tiles() {
             }
             
           } else {
-            console.log('intersectingEntries: ', tilesMainRef.intersectingEntries);
+            console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.target.innerText));
             scrollAnimationFrame = requestAnimationFrame(detectScrollMomentum);
           }
       }
@@ -77,7 +77,7 @@ export function Tiles() {
       // E N  D  O F  T E S T I N G ^^^^
 
       const observer = new IntersectionObserver((entries) => {
-        console.log('intersectingEntries: ', tilesMainRef.intersectingEntries);
+        
         
         entries.forEach(entry => {
           const tile = entry.target; // the html itself
@@ -97,13 +97,14 @@ export function Tiles() {
             tile.classList.add('transformTile'); // this will change the margin, boxy shadow, and z-index of the tile.
             img.style.transform = `scale(${scale(1, .2)})`;
             tile.style.margin = `auto ${scale(10, 10)}px`;
-            if(!tilesMainRef.intersectingEntries.includes(tile)) {
-              tilesMainRef.intersectingEntries.push(tile);
+            let entriesInstersecting = tilesMainRef.intersectingEntries.map(entry => entry.target.innerText);
+            if(!entriesInstersecting.includes(entry.target.innerText)) {
+              tilesMainRef.intersectingEntries.push(entry);
             }
-            console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.innerText));
+            console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.target.innerText));
           } else {
-            tilesMainRef.intersectingEntries = tilesMainRef.intersectingEntries.filter(currTile => currTile !== tile);
-            console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.innerText));
+            tilesMainRef.intersectingEntries = tilesMainRef.intersectingEntries.filter(currTile => currTile !== entry);
+            console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.target.innerText));
             // console.log('intersectingEntries: ', tilesMainRef.intersectingEntries);
           };
           tile.classList.remove('transformTile'); // remove the transformTile class from the tile.
