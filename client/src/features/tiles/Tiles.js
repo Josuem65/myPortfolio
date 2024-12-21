@@ -14,15 +14,15 @@ export function Tiles() {
   // const tileParentRef = useRef(null);
   // const [tileEntries, setTileEntries] = useState([]);
 
-    useEffect(() => { 
-      console.log('tileRefs', tileRefs);
+  useEffect(() => {
+    console.log('tileRefs', tileRefs);
     const screenWidth = document.documentElement.clientWidth;
-    if(screenWidth < 769) {
+    if (screenWidth < 769) {
       const thresholdList = [];
-      for (let i=0; i<=1; i+=0.01) {
+      for (let i = 0; i <= 1; i += 0.01) {
         thresholdList.push(i);
       }
-      
+
       //get the element with the class of tilesMain and add a key of 'lastScrollX' to it.
       // T E S T I N G  T O  B E T T E R  U N D E R S T A N D  H O W  S C R O L L  W O R K S  W I T H  I N T E R S E C T I O N  O B S E R V E R
       tilesMainRef.lastScrollX = tilesMainRef.current.scrollLeft;
@@ -30,7 +30,7 @@ export function Tiles() {
       let headTile = tileRefs.current[0];
       headTile.currScrollX;
       // console.log('tilesMainRef.lastScrollX: ', tilesMainRef.lastScrollX);
-      tilesMainRef.intersectingEntries = []; 
+      tilesMainRef.intersectingEntries = [];
 
       let scrollAnimationFrame;
       const detectScrollMomentum = () => {
@@ -41,31 +41,28 @@ export function Tiles() {
         tilesMainRef.lastScrollX = headTile.currScrollX;
         console.log('tilesMainRef.lastScrollX: ', tilesMainRef.lastScrollX);
 
-        if(scrollSpeed <= 5) {
+        if (scrollSpeed <= 5) {
           console.log('scroll speed <= 5, scrollSpeed: ', scrollSpeed);
           //find the tile in the intersectingEntries array that is closest to the center of the viewport.
-          console.log('tilesMainRef.intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.target.innerText));
-            
-            const tileWithHighestRatio = tilesMainRef.intersectingEntries.reduce((prev, curr) => {
-              console.log('prev: ', prev);
-              const prevRatio = prev.intersectionRatio
-              console.log('prevRatio: ', prevRatio);
-              const currRatio = curr.intersectionRatio
-              console.log('currRatio: ', currRatio);
-              console.log(currRatio > prevRatio ? curr : prev);
-              return currRatio > prevRatio ? curr : prev;
-            });
-            console.log('Tile with highest intersecting ratio:', tileWithHighestRatio.target.innerText);
-            // stop the scroll animation frame.
-            if (scrollAnimationFrame) {
-              cancelAnimationFrame(scrollAnimationFrame);
-              scrollAnimationFrame = null;
-            }
-            
-          } else {
-            console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.target.innerText));
-            scrollAnimationFrame = requestAnimationFrame(detectScrollMomentum);
+
+          const tileWithHighestRatio = tilesMainRef.intersectingEntries.reduce((prev, curr) => {
+            const prevRatio = prev.intersectionRatio
+            console.log('prevRatio: ', prevRatio);
+            const currRatio = curr.intersectionRatio
+            console.log('currRatio: ', currRatio);
+            console.log(currRatio > prevRatio ? curr : prev);
+            return currRatio > prevRatio ? curr : prev;
+          });
+          console.log('Tile with highest intersecting ratio:', tileWithHighestRatio.target.innerText);
+          // stop the scroll animation frame.
+          if (scrollAnimationFrame) {
+            cancelAnimationFrame(scrollAnimationFrame);
+            scrollAnimationFrame = null;
           }
+
+        } else {
+          scrollAnimationFrame = requestAnimationFrame(detectScrollMomentum);
+        }
       }
       tilesMainRef.current.addEventListener('touchend', () => {
         console.log('scrolling event fired');
@@ -77,50 +74,39 @@ export function Tiles() {
       // E N  D  O F  T E S T I N G ^^^^
 
       const observer = new IntersectionObserver((entries) => {
-        
-        
         entries.forEach(entry => {
           const tile = entry.target; // the html itself
           const imgP = entry.target.children[0]; // caption
           const img = entry.target.children[1];
-          
-          function scale(min, max) {
+          const scale = (min, max) => {
             let n = min + (entry.intersectionRatio * max);
             return n;
           }
 
-          // console.log('intersectingEntries: ', tilesMainRef.intersectingEntries);
-          //replace a startingScroll variable for a key on the tile object.
-          // 
-          // console.log(`entry: ${imgP.innerText}, round: ${round < 5 ? round++ : round = 0}`);
-          if(entry.isIntersecting) {
+          if (entry.isIntersecting) {
             tile.classList.add('transformTile'); // this will change the margin, boxy shadow, and z-index of the tile.
             img.style.transform = `scale(${scale(1, .2)})`;
             tile.style.margin = `auto ${scale(10, 10)}px`;
             let entriesInstersecting = tilesMainRef.intersectingEntries.map(entry => entry.target.innerText);
-            if(!entriesInstersecting.includes(entry.target.innerText)) {
+            if (!entriesInstersecting.includes(entry.target.innerText)) {
               tilesMainRef.intersectingEntries.push(entry);
             }
-            console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.target.innerText));
+            // console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.target.innerText));
           } else {
-            tilesMainRef.intersectingEntries = tilesMainRef.intersectingEntries.filter(currTile => currTile !== entry);
-            console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.target.innerText));
-            // console.log('intersectingEntries: ', tilesMainRef.intersectingEntries);
+            tilesMainRef.intersectingEntries = tilesMainRef.intersectingEntries.filter(currTile => currTile.target.innerText !== entry.target.innerText);
+            // console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.target.innerText));
+            tile.classList.remove('transformTile'); // remove the transformTile class from the tile.
           };
-          tile.classList.remove('transformTile'); // remove the transformTile class from the tile.
         });
-        }, 
-
+      },
         {
-          // root: null,
-          rootMargin: `0px -${screenWidth - (screenWidth/2 + 130)}px 0px -${screenWidth - (screenWidth/2 + 130)}px`, // '0px 0px 0px 0px'
+          rootMargin: `0px -${screenWidth - (screenWidth / 2 + 130)}px 0px -${screenWidth - (screenWidth / 2 + 130)}px`, // '0px 0px 0px 0px'
           threshold: thresholdList,
         },
-      );    
-      console.log(observer);
-        tileRefs.current.forEach(tile => {
-          observer.observe(tile);
-        });
+      );
+      tileRefs.current.forEach(tile => {
+        observer.observe(tile);
+      });
     }
     //get the object of the element with a class of 'redBox'
     const redBox = boxRef.current;
