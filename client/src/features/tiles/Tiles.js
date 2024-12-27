@@ -18,9 +18,9 @@ export function Tiles() {
     console.log('tileRefs', tileRefs);
     const screenWidth = document.documentElement.clientWidth;
     if (screenWidth < 769) {
-      const thresholdList = [];
+      const thresholdArr = [];
       for (let i = 0; i <= 1; i += 0.01) {
-        thresholdList.push(i);
+        thresholdArr.push(i);
       }
 
       //get the element with the class of tilesMain and add a key of 'lastScrollX' to it.
@@ -41,19 +41,20 @@ export function Tiles() {
         tilesMainRef.lastScrollX = headTile.currScrollX;
         console.log('tilesMainRef.lastScrollX: ', tilesMainRef.lastScrollX);
 
-        if (scrollSpeed <= 5) {
+        if (scrollSpeed <= 1) {
           console.log('scroll speed <= 5, scrollSpeed: ', scrollSpeed);
           //find the tile in the intersectingEntries array that is closest to the center of the viewport.
-
           const tileWithHighestRatio = tilesMainRef.intersectingEntries.reduce((prev, curr) => {
             const prevRatio = prev.intersectionRatio
-            console.log('prevRatio: ', prevRatio);
+            console.log('prevRatio: ', prevRatio, 'prev: ', prev.target.innerText);
             const currRatio = curr.intersectionRatio
-            console.log('currRatio: ', currRatio);
-            console.log(currRatio > prevRatio ? curr : prev);
+            console.log('currRatio: ', currRatio, 'curr: ', curr.target.innerText);
             return currRatio > prevRatio ? curr : prev;
           });
           console.log('Tile with highest intersecting ratio:', tileWithHighestRatio.target.innerText);
+          // scroll to the tile with the highest intersection ratio.
+          tileWithHighestRatio.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
           // stop the scroll animation frame.
           if (scrollAnimationFrame) {
             cancelAnimationFrame(scrollAnimationFrame);
@@ -101,7 +102,7 @@ export function Tiles() {
       },
         {
           rootMargin: `0px -${screenWidth - (screenWidth / 2 + 130)}px 0px -${screenWidth - (screenWidth / 2 + 130)}px`, // '0px 0px 0px 0px'
-          threshold: thresholdList,
+          threshold: thresholdArr,
         },
       );
       tileRefs.current.forEach(tile => {
@@ -132,11 +133,19 @@ const tileRefHandler = (element, index) => {
 }
 
   return (
-      <div className="tilesMain" ref={tilesMainRef}>
-        {tileImgList.map((item, index) => {
-          return <div className="tile" ref={(element) => tileRefHandler(element, index)} onClick={() => openInNewTab(item.url)} key={item.id}><p>{item.name}</p><img className={'tileImg'} src={item.image}/></div>
-        })}
-        {/* <div className='redBox' ref={boxRef}></div> */}
-      </div>
+    <div className="tilesMain" ref={tilesMainRef}>
+      {tileImgList.map((item, index) => {
+        return <div className="tile"
+          ref={(element) => tileRefHandler(element, index)}
+          onClick={() => openInNewTab(item.url)}
+          key={item.id}>
+          <p>{item.name}</p>
+          <img
+            className={'tileImg'}
+            src={item.image} />
+        </div>
+      })}
+      {/* <div className='redBox' ref={boxRef}></div> */}
+    </div>
   );
 }
