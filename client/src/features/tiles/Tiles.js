@@ -30,7 +30,7 @@ export function Tiles() {
       let headTile = tileRefs.current[0];
       headTile.currScrollX;
       // console.log('tilesMainRef.lastScrollX: ', tilesMainRef.lastScrollX);
-      tilesMainRef.intersectingEntries = [];
+      tilesMainRef.intersectingEntries = {};
 
       let scrollAnimationFrame;
       const detectScrollMomentum = () => {
@@ -41,19 +41,19 @@ export function Tiles() {
         tilesMainRef.lastScrollX = headTile.currScrollX;
         console.log('tilesMainRef.lastScrollX: ', tilesMainRef.lastScrollX);
 
-        if (scrollSpeed <= 1) {
+        if (scrollSpeed <= 2.5) {
           console.log('scroll speed <= 5, scrollSpeed: ', scrollSpeed);
           //find the tile in the intersectingEntries array that is closest to the center of the viewport.
-          const tileWithHighestRatio = tilesMainRef.intersectingEntries.reduce((prev, curr) => {
-            const prevRatio = prev.intersectionRatio
-            console.log('prevRatio: ', prevRatio, 'prev: ', prev.target.innerText);
-            const currRatio = curr.intersectionRatio
-            console.log('currRatio: ', currRatio, 'curr: ', curr.target.innerText);
+            const tileWithHighestRatio = Object.values(tilesMainRef.intersectingEntries).reduce((prev, curr) => {
+            const prevRatio = prev.intersectionRatio;
+            const currRatio = curr.intersectionRatio;
             return currRatio > prevRatio ? curr : prev;
-          });
+            });
           console.log('Tile with highest intersecting ratio:', tileWithHighestRatio.target.innerText);
           // scroll to the tile with the highest intersection ratio.
-          tileWithHighestRatio.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            const targetPosition = tileWithHighestRatio.target.offsetLeft;
+            const scrollPosition = targetPosition - (screenWidth / 2) + (tileWithHighestRatio.target.offsetWidth / 2);
+            tilesMainRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
 
           // stop the scroll animation frame.
           if (scrollAnimationFrame) {
@@ -88,16 +88,12 @@ export function Tiles() {
             tile.classList.add('transformTile'); // this will change the margin, boxy shadow, and z-index of the tile.
             img.style.transform = `scale(${scale(1, .2)})`;
             tile.style.margin = `auto ${scale(10, 10)}px`;
-            let entriesInstersecting = tilesMainRef.intersectingEntries.map(entry => entry.target.innerText);
-            if (!entriesInstersecting.includes(entry.target.innerText)) {
-              tilesMainRef.intersectingEntries.push(entry);
-            }
-            // console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.target.innerText));
+            tilesMainRef.intersectingEntries[entry.target.innerText] = entry;
           } else {
-            tilesMainRef.intersectingEntries = tilesMainRef.intersectingEntries.filter(currTile => currTile.target.innerText !== entry.target.innerText);
-            // console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.target.innerText));
+            delete tilesMainRef.intersectingEntries[entry.target.innerText];
             tile.classList.remove('transformTile'); // remove the transformTile class from the tile.
-          };
+          }
+            // console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.target.innerText));
         });
       },
         {
