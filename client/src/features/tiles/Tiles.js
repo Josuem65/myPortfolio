@@ -23,8 +23,6 @@ export function Tiles() {
         thresholdArr.push(i);
       }
 
-      //get the element with the class of tilesMain and add a key of 'lastScrollX' to it.
-      // T E S T I N G  T O  B E T T E R  U N D E R S T A N D  H O W  S C R O L L  W O R K S  W I T H  I N T E R S E C T I O N  O B S E R V E R
       tilesMainRef.lastScrollX = tilesMainRef.current.scrollLeft;
       console.log('tilesMainRef.lastScrollX: ', tilesMainRef.lastScrollX);
       let headTile = tileRefs.current[0];
@@ -33,26 +31,32 @@ export function Tiles() {
       tilesMainRef.intersectingEntries = {};
 
       let scrollAnimationFrame;
+      let startX;
+      let endX;
+      let scrollDirection;
+
       const detectScrollMomentum = () => {
+        console.log('scrollDirection: ', scrollDirection);
         headTile.currScrollX = tilesMainRef.current.scrollLeft;
         console.log('currScrollX: ', headTile.currScrollX);
         const scrollSpeed = Math.abs(headTile.currScrollX - tilesMainRef.lastScrollX);
         console.log('scrollSpeed: ', scrollSpeed);
         tilesMainRef.lastScrollX = headTile.currScrollX;
         console.log('tilesMainRef.lastScrollX: ', tilesMainRef.lastScrollX);
-
-        if (scrollSpeed <= 2.5) {
-          console.log('scroll speed <= 5, scrollSpeed: ', scrollSpeed);
-          //find the tile in the intersectingEntries array that is closest to the center of the viewport.
-            const tileWithHighestRatio = Object.values(tilesMainRef.intersectingEntries).reduce((prev, curr) => {
+        const tileWithHighestRatio = () => {
+          return Object.values(tilesMainRef.intersectingEntries).reduce((prev, curr) => {
             const prevRatio = prev.intersectionRatio;
             const currRatio = curr.intersectionRatio;
             return currRatio > prevRatio ? curr : prev;
-            });
-          console.log('Tile with highest intersecting ratio:', tileWithHighestRatio.target.innerText);
-          // scroll to the tile with the highest intersection ratio.
-            const targetPosition = tileWithHighestRatio.target.offsetLeft;
-            const scrollPosition = targetPosition - (screenWidth / 2) + (tileWithHighestRatio.target.offsetWidth / 2);
+          });
+        }
+
+        if (scrollSpeed <= 2) {
+          console.log('scroll speed <= 2, scrollSpeed: ', scrollSpeed);
+          //find the tile in the intersectingEntries object that is closest to the center of the viewport.
+          console.log('Tile with highest intersecting ratio:', tileWithHighestRatio().target.innerText);
+            const targetPosition = tileWithHighestRatio().target.offsetLeft;
+            const scrollPosition = targetPosition - (screenWidth / 2) + (tileWithHighestRatio().target.offsetWidth / 2);
             tilesMainRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
 
           // stop the scroll animation frame.
@@ -60,22 +64,82 @@ export function Tiles() {
             cancelAnimationFrame(scrollAnimationFrame);
             scrollAnimationFrame = null;
           }
+        } else if(scrollSpeed <= 10) {
+          // element next in array, whether its the next or previous element, should be locked in the center of the viewport when it reaches the center.
+          // 1. find which way the user is scrolling... scrollDirection = 'left' or 'right'.
+          if(scrollDirection === 'left') {
+            // the next element (current tile index + 1) in the tilesMainRef.intersectingEntries array should stop the scrolling when it reaches the center of the viewport.
+            // 1. Obtain the current entry with the highest intersection ratio. tileWithHighestRatio()
+              console.log(tileWithHighestRatio());
+            // 2. Find the next element in the tilesMainRef.intersectingEntries array.
 
+
+
+                        // L F T   O F F   H E R E !
+
+
+
+            //      B U G   H E R E  R E L A T I N G   T O   T H E  A R R A Y  W E ' R E   U S I N G!!!!!!!!!!!!!!!!!!!!!!!!1
+            // entriesObj will be used instead of tilesMainRef.intersectingEntries
+            let nextTile = Object.values(tilesMainRef.intersectingEntries)[tileWithHighestRatio().index + 1]; // check to see if index property is correct.
+            // 3. If the next element exists, stop at the next element.
+            if(nextTile) {
+              // 4. add some sort of a hook that hooks the nextTile's x-axis center to the viewport's x-axis center and cancelAnimationFrame()
+              nextTile.hook = true;
+              console.log('nextTile: ', nextTile);
+            } else {
+              // 4. if next tile is undefined, add hook to tileWithHighestRatio()
+              tileWithHighestRatio().hook = true;
+              console.log('tileWithHighestRatio() hook: ', tileWithHighestRatio());
+            }
+          } else if(scrollDirection === 'right') {
+            // the next element (current tile index - 1) in the tilesMainRef.intersectingEntries array should stop the scrolling when it reaches the center of the viewport.
+            let prevTile = Object.values(tilesMainRef.intersectingEntries)[tileWithHighestRatio().index - 1];
+            if(prevTile) {
+              prevTile.hook = true;
+              console.log('prevTile: ', prevTile);
+            } else {
+              tileWithHighestRatio().hook = true;
+              console.log('tileWithHighestRatio() hook: ', tileWithHighestRatio());
+            }
+          }
+          // 2. if (scrollDirection === left/right) {next element left/right of the current tilesMainRef.intersectingEntries array should stop the scrolling when it reaches the center of the viewport.}
+          //    1. 
+          // F I N D   T H E   S C R O L L  D I R E C T I O N
+          // get the x coordinate of the finger when the touchend event is fired.
+
+          if (scrollAnimationFrame) {
+            cancelAnimationFrame(scrollAnimationFrame);
+            scrollAnimationFrame = null;
+          }
         } else {
           scrollAnimationFrame = requestAnimationFrame(detectScrollMomentum);
         }
       }
-      tilesMainRef.current.addEventListener('touchend', () => {
+
+      tilesMainRef.current.addEventListener('touchstart', event => startX = event.touches[0].clientX);
+      tilesMainRef.current.addEventListener('touchend', (event) => {
         console.log('scrolling event fired');
+        endX = event.changedTouches[0].clientX; // Get the first touch point
+        scrollDirection = startX > endX ? 'left' : 'right';
         if (scrollAnimationFrame) {
           cancelAnimationFrame(scrollAnimationFrame);
         }
         scrollAnimationFrame = requestAnimationFrame(detectScrollMomentum);
       });
-      // E N  D  O F  T E S T I N G ^^^^
 
+      let tileIndex = 0;
+      let entriesObj = {};
+      
       const observer = new IntersectionObserver((entries) => {
+
         entries.forEach(entry => {
+
+          entry.index === undefined ? entry.index = tileIndex++ : null;
+          if (entriesObj[entry.target.innerText] === undefined) {
+            entriesObj[entry.target.innerText] = entry;
+          }
+
           const tile = entry.target; // the html itself
           const imgP = entry.target.children[0]; // caption
           const img = entry.target.children[1];
@@ -83,17 +147,29 @@ export function Tiles() {
             let n = min + (entry.intersectionRatio * max);
             return n;
           }
-
+          console.log('entriesObj: ', entriesObj);
+          
           if (entry.isIntersecting) {
+            // console.log('entry.isIntersecting: ', entry);
             tile.classList.add('transformTile'); // this will change the margin, boxy shadow, and z-index of the tile.
             img.style.transform = `scale(${scale(1, .2)})`;
             tile.style.margin = `auto ${scale(10, 10)}px`;
             tilesMainRef.intersectingEntries[entry.target.innerText] = entry;
+            if(entry.hook) {
+              // 1. find the x-axis offset the entry's left side needs to be at to be centered in the viewport.
+              const offsetToCenter = (screenWidth / 2) - (tile.offsetWidth / 2);
+              // 2. if tile.offsetLeft equals offsetToCenter, cancelAnimationFrame()
+              console.log('offsetToCenter: ', offsetToCenter);
+              console.log('tile.offsetLeft: ', tile.offsetLeft);
+              if(tile.offsetLeft === offsetToCenter) {
+                cancelAnimationFrame(scrollAnimationFrame);
+                entry.hook = false;
+              }
+            }
           } else {
             delete tilesMainRef.intersectingEntries[entry.target.innerText];
             tile.classList.remove('transformTile'); // remove the transformTile class from the tile.
           }
-            // console.log('intersectingEntries: ', tilesMainRef.intersectingEntries.map(entry => entry.target.innerText));
         });
       },
         {
@@ -105,7 +181,6 @@ export function Tiles() {
         observer.observe(tile);
       });
     }
-    //get the object of the element with a class of 'redBox'
     const redBox = boxRef.current;
     // redBox.style.width =260 + 'px';
     // redBox.style.left = ((screenWidth/2) - 130) + 'px';
