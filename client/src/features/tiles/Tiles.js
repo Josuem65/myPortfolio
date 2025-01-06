@@ -130,16 +130,27 @@ export function Tiles() {
 
       let tileIndex = 0;
       let entriesObj = {};
-      
+      let prevEntry = null;
       const observer = new IntersectionObserver((entries) => {
 
         entries.forEach(entry => {
 
-          entry.index === undefined ? entry.index = tileIndex++ : null;
-          if (entriesObj[entry.target.innerText] === undefined) {
-            entriesObj[entry.target.innerText] = entry;
+          const addToEntriesObj = (entry) => {
+            if (entriesObj[entry.target.innerText] === undefined) {
+              entriesObj[entry.target.innerText] = entry;
+            }
           }
 
+          if (tileIndex <= 4) {
+            prevEntry != null ? prevEntry.next = entry : null;
+            entry.prev = prevEntry;
+            entry.next = null;
+            addToEntriesObj(entry);
+            prevEntry = entry;
+            tileIndex++;
+          }
+          
+          console.log('entriesObj: ', entriesObj);
           const tile = entry.target; // the html itself
           const imgP = entry.target.children[0]; // caption
           const img = entry.target.children[1];
@@ -147,7 +158,7 @@ export function Tiles() {
             let n = min + (entry.intersectionRatio * max);
             return n;
           }
-          console.log('entriesObj: ', entriesObj);
+          // console.log('entriesObj: ', entriesObj);
           
           if (entry.isIntersecting) {
             // console.log('entry.isIntersecting: ', entry);
