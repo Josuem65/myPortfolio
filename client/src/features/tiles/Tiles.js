@@ -36,84 +36,85 @@ export function Tiles() {
         }
       });
 
-      tilesMainRef.lastScrollX = tilesMainRef.current.scrollLeft;
-      let headTile = tileRefs.current[0];
+      // tilesMainRef.lastScrollX = tilesMainRef.current.scrollLeft;
+      // let headTile = tileRefs.current[0];
       tilesMainRef.intersectingEntries = {};
 
-      let scrollAnimationFrame;
-      let startX;
-      let endX;
-      let scrollDirection;
+      // let scrollAnimationFrame;
+      // let startX;
+      // let endX;
+      // let scrollDirection;
+      // let scrollSpeed;
 
       // Calculate scroll speed, scroll direction, and do tasks based on speed and direction.
-      const detectScrollMomentum = () => {
-        console.log('scrollDirection: ', scrollDirection);
-        headTile.currScrollX = tilesMainRef.current.scrollLeft;
-        const scrollSpeed = Math.abs(headTile.currScrollX - tilesMainRef.lastScrollX);
-        console.log('scrollSpeed: ', scrollSpeed);
-        tilesMainRef.lastScrollX = headTile.currScrollX;
-        const tileWithHighestRatio = () => {
-          return Object.values(tilesMainRef.intersectingEntries).reduce((prev, curr) => {
-            const prevRatio = prev.intersectionRatio;
-            const currRatio = curr.intersectionRatio;
-            return currRatio > prevRatio ? curr : prev;
-          });
-        }
-        // If user lets go of screen, center tile closest to the center of the screen.
-        if (scrollSpeed <= 2) {
-          console.log('scroll speed <= 2, scrollSpeed: ', scrollSpeed);
-            const targetPosition = tileWithHighestRatio().target.offsetLeft;
-            const scrollPosition = targetPosition - (screenWidth / 2) + (tileWithHighestRatio().target.offsetWidth / 2);
-            tilesMainRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
-          if (scrollAnimationFrame) { // stop scroll animation frame.
-            cancelAnimationFrame(scrollAnimationFrame);
-            scrollAnimationFrame = null;
-          }
-          // If scroll speed is slow enough then add a hook key to the next tile so it centers in the viewport. If no next tile then add hook to current tile.
-        } else if(scrollSpeed <= 10) {
-          console.log('scroll speed <= 10, scrollSpeed: ', scrollSpeed);
-          if(scrollDirection === 'left') {
-            let nextTile = tileWithHighestRatio().next;
-            console.log(tileWithHighestRatio());
-            console.log('nextTile: ', nextTile);
-            if(nextTile) {
-              nextTile.hook = true;
-            } else {   
-              tileWithHighestRatio().hook = true;
-            }                             
-          } else if(scrollDirection === 'right') {
-            let prevTile = tileWithHighestRatio().prev;
-            if(prevTile) {
-              prevTile.hook = true;
-            } else {
-              tileWithHighestRatio().hook = true;
-            }
-          }
+      // const detectScrollMomentum = () => {
+      //   console.log('scrollDirection: ', scrollDirection);
+      //   headTile.currScrollX = tilesMainRef.current.scrollLeft;
+      //   scrollSpeed = Math.abs(headTile.currScrollX - tilesMainRef.lastScrollX);
+      //   console.log('scrollSpeed: ', scrollSpeed);
+      //   tilesMainRef.lastScrollX = headTile.currScrollX;
+      //   const tileWithHighestRatio = () => {
+      //     return Object.values(tilesMainRef.intersectingEntries).reduce((prev, curr) => {
+      //       const prevRatio = prev.intersectionRatio;
+      //       const currRatio = curr.intersectionRatio;
+      //       return currRatio > prevRatio ? curr : prev;
+      //     });
+      //   }
+      //   // If user lets go of screen, center tile closest to the center of the screen.
+      //   if (scrollSpeed <= 1) {
+      //     console.log('scroll speed <= 2, scrollSpeed: ', scrollSpeed);
+      //       const targetPosition = tileWithHighestRatio().target.offsetLeft;
+      //       const scrollPosition = targetPosition - (screenWidth / 2) + (tileWithHighestRatio().target.offsetWidth / 2);
+      //       tilesMainRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+      //     if (scrollAnimationFrame) { // stop scroll animation frame.
+      //       cancelAnimationFrame(scrollAnimationFrame);
+      //       scrollAnimationFrame = null;
+      //     }
+      //   } else if (scrollSpeed <= 5) {
+      //     console.log('scroll speed <= 10, scrollSpeed: ', scrollSpeed);
+      //     tileWithHighestRatio().target.hook = true;
+      //     // If scroll speed is slow enough then add a hook key to the next tile so it centers in the viewport. If no next tile then add hook to current tile.
+      //   } else if(scrollSpeed <= 25) {
+      //     console.log('scroll speed <= 10, scrollSpeed: ', scrollSpeed);
+      //     if(scrollDirection === 'left') {
+      //       let nextTile = tileWithHighestRatio().target.next;
+      //       if(nextTile) {
+      //         nextTile.hook = true;
+      //         console.log('nextTile.hook: ', nextTile.hook);
+      //       } else {   
+      //         tileWithHighestRatio().target.hook = true;
+      //       }                             
+      //     } else if(scrollDirection === 'right') {
+      //       let prevTile = tileWithHighestRatio().target.prev;
+      //       if(prevTile) {
+      //         prevTile.hook = true;
+      //       } else {
+      //         tileWithHighestRatio().target.hook = true;
+      //       }
+      //     }
 
-          if (scrollAnimationFrame) {
-            cancelAnimationFrame(scrollAnimationFrame);
-            scrollAnimationFrame = null;
-          }
-        } else {
-          scrollAnimationFrame = requestAnimationFrame(detectScrollMomentum);
-        }
-      }
+      //     if (scrollAnimationFrame) {
+      //       cancelAnimationFrame(scrollAnimationFrame);
+      //       scrollAnimationFrame = null;
+      //     }
+      //   } else {
+      //     scrollAnimationFrame = requestAnimationFrame(detectScrollMomentum);
+      //   }
+      // }
 
       // Event listeners for screen interaction. On touch and lift of finger starts scroll speed calculation.
-      tilesMainRef.current.addEventListener('touchstart', event => startX = event.touches[0].clientX);
-      tilesMainRef.current.addEventListener('touchend', (event) => {
-        endX = event.changedTouches[0].clientX; // Get the first touch point
-        scrollDirection = startX > endX ? 'left' : 'right';
-        if (scrollAnimationFrame) {
-          cancelAnimationFrame(scrollAnimationFrame);
-        }
-        scrollAnimationFrame = requestAnimationFrame(detectScrollMomentum);
-      });
+      // tilesMainRef.current.addEventListener('touchstart', event => startX = event.touches[0].clientX);
+      // tilesMainRef.current.addEventListener('touchend', (event) => {
+      //   endX = event.changedTouches[0].clientX; // Get the first touch point
+      //   scrollDirection = startX > endX ? 'left' : 'right';
+      //   if (scrollAnimationFrame) {
+      //     cancelAnimationFrame(scrollAnimationFrame);
+      //   }
+      //   scrollAnimationFrame = requestAnimationFrame(detectScrollMomentum);
+      // });
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          //                               L E F T    O F F    H E R E !!!!!!!
-          console.log('entry: ', entry.target.innerText, entry);  // N O T   A L L  E N T R I E S   H A V E   A   P R E V    A N D   N E X T   P R O P E R T Y
           const tile = entry.target; // the html itself
           const imgP = entry.target.children[0]; // caption
           const img = entry.target.children[1];
@@ -128,18 +129,18 @@ export function Tiles() {
             img.style.transform = `scale(${scale(1, .2)})`;
             tile.style.margin = `auto ${scale(10, 10)}px`;
             tilesMainRef.intersectingEntries[entry.target.innerText] = entry;
-            if(entry.hook) {
-              console.log('entry.hook: ', entry.hook);
+            // if(scrollSpeed <= 10) {
               // 1. find the x-axis offset the entry's left side needs to be at to be centered in the viewport.
-              const leftOffset = (screenWidth / 2) - (tile.offsetWidth / 2);
-              // 2. if tile.offsetLeft equals leftOffset, cancelAnimationFrame()
-              console.log('tile.offsetLeft: ', tile.offsetLeft);
-              if(tile.offsetLeft === leftOffset) {
-                console.log('tile.offsetLeft === leftOffset. Tile with hook should be centered in the viewport.');
-                cancelAnimationFrame(scrollAnimationFrame);
-                entry.hook = false;
-              }
-            }
+              // const clientWidthLeftOffset = (screenWidth / 2) - (tile.offsetWidth / 2);
+              // 2. if tile.offsetLeft equals clientWidthLeftOffset, cancelAnimationFrame()
+              // const rect = tile.getBoundingClientRect();
+              // const tileLeftOffset = rect.left + window.scrollX;
+              // if(tile.offsetLeft === clientWidthLeftOffset) {
+                // console.log('tile.offsetLeft === clientwidthLeftOffset. Tile with hook should be centered in the viewport.');
+                // cancelAnimationFrame(scrollAnimationFrame);
+                // entry.hook = false;
+            //   }
+            // }
           } else {
             delete tilesMainRef.intersectingEntries[entry.target.innerText];
             tile.classList.remove('transformTile'); // remove the transformTile class from the tile.
