@@ -179,19 +179,21 @@ const tileRefHandler = (element, index) => {
 }
 
   return (
-    <div className="tilesMain" ref={tilesMainRef}>
-      {tileImgList.map((item, index) => {
-        return <div className="tile"
-          ref={(element) => tileRefHandler(element, index)}
-          onClick={() => openInNewTab(item.url)}
-          key={item.id}>
-          <p>{item.name}</p>
-          <img
-            className={'tileImg'}
-            src={item.image} />
-        </div>
-      })}
-      {/* <div className='redBox' ref={boxRef}></div> */}
+    <div className="tilesMainWrapper">
+      <div className="tilesMain" ref={tilesMainRef}>
+        {tileImgList.map((item, index) => {
+          return <div className="tile"
+            ref={(element) => tileRefHandler(element, index)}
+            onClick={() => openInNewTab(item.url)}
+            key={item.id}>
+            <p>{item.name}</p>
+            <img
+              className={'tileImg'}
+              src={item.image} />
+          </div>
+        })}
+        {/* <div className='redBox' ref={boxRef}></div> */}
+      </div>
     </div>
   );
 }

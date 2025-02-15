@@ -5,17 +5,17 @@
         align-items: center;
         justify-content: space-around;
         margin: 0 auto;
-        width: 75%;
+        width: 100%;
         height: 30vh; 
         min-height: 160px;
         border: 1px dotted rgb(21, 21, 21);
         overflow-x: auto; /* Make .tilesMain scrollable horizontally */
         overflow-y: hidden; /* Hide y-axis scrollbar */
         position: relative;
-        }
+    }
         
-        /* Custom scrollbar for Webkit browsers */
-        .tilesMain::-webkit-scrollbar {
+    /* Custom scrollbar for Webkit browsers */
+    .tilesMain::-webkit-scrollbar {
         width: 8px;
         height: 5px;
     }
@@ -65,26 +65,33 @@
         transition: .4s;
     }
     
-    /* Fade effect on the sides
-    .tilesMain::before, .tilesMain::after {
+    /* Fade effect on the sides*/
+    .tilesMainWrapper {
+        position: relative;
+        width: 75%;
+        overflow: hidden;
+        margin: 0 auto; /* Center the div on the x-axis */
+    }
+
+    .tilesMainWrapper::before, .tilesMainWrapper::after {
         content: '';
         position: absolute;
         top: 0;
         bottom: 0;
-        width: 50px;
+        width: 95px;
         pointer-events: none;
-        z-index: 2;
+        z-index: 5;
     }
 
-    .tilesMain::before {
+    .tilesMainWrapper::before {
         left: 0;
-        background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+        background: linear-gradient(to right, rgba(26, 26, 26, 0.795), rgba(0, 0, 0, 0));
     }
     
-    .tilesMain::after {
+    .tilesMainWrapper::after {
         right: 0;
-        background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-    } */
+        background: linear-gradient(to left, rgba(26, 26, 26, 0.795), rgba(0, 0, 0, 0));
+    }
 }
 
 
