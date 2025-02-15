@@ -38,7 +38,7 @@ export function Tiles() {
 
       // tilesMainRef.lastScrollX = tilesMainRef.current.scrollLeft;
       // let headTile = tileRefs.current[0];
-      tilesMainRef.intersectingEntries = {};
+      // tilesMainRef.intersectingEntries = {};
 
       // let scrollAnimationFrame;
       // let startX;
@@ -128,11 +128,11 @@ export function Tiles() {
             tile.classList.add('transformTile'); // this will change the margin, boxy shadow, and z-index of the tile.
             img.style.transform = `scale(${scale(1, .2)})`;
             tile.style.margin = `auto ${scale(10, 10)}px`;
-            tilesMainRef.intersectingEntries[entry.target.innerText] = entry;
+            // tilesMainRef.intersectingEntries[entry.target.innerText] = entry;
             // if(scrollSpeed <= 10) {
-              // 1. find the x-axis offset the entry's left side needs to be at to be centered in the viewport.
+              // 1. find the x-axis offset, the entry's left side needs to be centered in the viewport.
               // const clientWidthLeftOffset = (screenWidth / 2) - (tile.offsetWidth / 2);
-              // 2. if tile.offsetLeft equals clientWidthLeftOffset, cancelAnimationFrame()
+              // 2. if tile.offsetLeft equals clientWidthLeftOffset then cancelAnimationFrame()
               // const rect = tile.getBoundingClientRect();
               // const tileLeftOffset = rect.left + window.scrollX;
               // if(tile.offsetLeft === clientWidthLeftOffset) {
@@ -142,7 +142,7 @@ export function Tiles() {
             //   }
             // }
           } else {
-            delete tilesMainRef.intersectingEntries[entry.target.innerText];
+            // delete tilesMainRef.intersectingEntries[entry.target.innerText];
             tile.classList.remove('transformTile'); // remove the transformTile class from the tile.
           }
         });

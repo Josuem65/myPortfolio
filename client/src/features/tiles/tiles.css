@@ -1,26 +1,50 @@
-  @media (min-width: 769px) {
+@media (min-width: 769px) {
     .tilesMain {
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
         justify-content: space-around;
         margin: 0 auto;
-        width: /*view width*/ 75%;
+        width: 75%;
         height: 30vh; 
+        min-height: 160px;
         border: 1px dotted rgb(21, 21, 21);
+        overflow-x: auto; /* Make .tilesMain scrollable horizontally */
+        overflow-y: hidden; /* Hide y-axis scrollbar */
+        position: relative;
+        }
+        
+        /* Custom scrollbar for Webkit browsers */
+        .tilesMain::-webkit-scrollbar {
+        width: 8px;
+        height: 5px;
+    }
+
+    .tilesMain::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.362);
+    }
+
+    .tilesMain::-webkit-scrollbar-thumb {
+        background: rgb(54, 54, 54);
+        border-radius: 10px;
     }
     
-    /* on .tilesMain:hover, transform its children elements to scale down by 25%, also dim its children elements by 25%, exempt the */
-    
     .tile {
+        border: 1px dotted yellow;
         border-radius: 20px;
         transform: scale(.8);
         transition: .5s ease;
         cursor: pointer;
         margin: 0 12px;
         color: rgb(228, 228, 228);
+        min-width: 165px;
     }
     
+    .tile p {
+        border: 1px dashed red;
+        max-height: 1em;
+        margin-bottom: .25em;
+    }
     
     .tile:hover {
         transform: scale(1.2);
@@ -34,23 +58,54 @@
         height: 100%;
         object-fit: cover;
         border-radius: 15px;
-        /* box-shadow: 0px 2px 5px 1px rgba(255, 255, 255, 0.5); */
-        /* border: 1px solid rgb(194, 194, 254); */
     }
     
     .tileImg:hover {
         box-shadow: 0px 3px 20px 1px rgba(255, 255, 255, 0.5);
         transition: .4s;
     }
-  }
+    
+    /* Fade effect on the sides
+    .tilesMain::before, .tilesMain::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 50px;
+        pointer-events: none;
+        z-index: 2;
+    }
 
-  @media (max-width: 768px) and (pointer: coarse) {
+    .tilesMain::before {
+        left: 0;
+        background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    }
+    
+    .tilesMain::after {
+        right: 0;
+        background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    } */
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Media query for mobile devices */
+@media (max-width: 768px) and (pointer: coarse) {
+
     /* make tilesMain's children scrollable horizontally*/
     /* tilesMain must contain content within its set height*/
     .tilesMain {
         display: block;
         width: 100%;
-        height: 97vh; 
+        height: 97vh;
         border: 1px dotted rgb(168, 92, 92);
         overflow-y: hidden;
         overflow-x: scroll;
@@ -88,21 +143,22 @@
         object-fit: cover;
         transition: .1s ease;
     }
+}
 
-    /* .transformImg {
+
+      /* .transformImg {
         transform: scale(1.2);
         border-radius: 35px;
         z-index: 3;
         transition: 0.3s ease;
         box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.5);      
     } */
-/* redBox needs to have a negative z-index and have an display of absolute to represent the rootMargin in our intersectionObserver*/
-    .redBox {
-        position: absolute;
-        width: 300px;
-        background-color: rgba(255, 0, 0, 0.253);
-        height: 100%;
-        top: 430px;
-        z-index: 1;
-    }
-  }
+      /* redBox needs to have a negative z-index and have an display of absolute to represent the rootMargin in our intersectionObserver*/
+      .redBox {
+          position: absolute;
+          width: 300px;
+          background-color: rgba(255, 0, 0, 0.253);
+          height: 100%;
+          top: 430px;
+          z-index: 1;
+      }

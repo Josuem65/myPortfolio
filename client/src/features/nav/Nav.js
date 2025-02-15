@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-  incrementAsync,
-  incrementIfOdd,
-  selectCount,
-} from './navSlice';
+import { selectCount } from './navSlice';
 import { selectTogglePopup, togglePopup } from '../popup/popupSlice';
 import styles from './nav.css';
 

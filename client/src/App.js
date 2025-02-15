@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import { Nav } from './features/nav/Nav';
 import { Content } from './features/content/Content';
 import { Tiles } from './features/tiles/Tiles';

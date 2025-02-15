@@ -4,7 +4,14 @@
   background-color: rgb(34, 34, 34);;
 }
 
-.logosDiv {
+.text {
+  color: rgb(228, 228, 228);
+}
+
+p {
+  font-family: sans-serif;
+}
+/* .logosDiv {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-around;
@@ -16,7 +23,8 @@
   max-height: 15vh;
   max-width: 15vh;
   border: 1px dotted gray;
-}
+} */
+
 
 
 /* 

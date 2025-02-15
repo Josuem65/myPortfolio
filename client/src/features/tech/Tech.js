@@ -14,8 +14,8 @@ export function Tech() {
     <div className="logosDiv techMain">
       {techLogos.map((logo) => {
         return (
-          <div className="logo logoTech" key={logo.id}>
-            <img src={logo.image} alt={logo.name} />
+          <div className="logoContainer" key={logo.id}>
+            <img src={logo.image} alt={logo.name} class="techLogo"/>
           </div>
         );
       })}
