@@ -9,16 +9,14 @@ export function Connections() {
   const [incrementAmount, setIncrementAmount] = useState('2');
 
   return (
-    <div>
-      <div className="logosDiv connectMain">
-       {connectLogos.map((logo) => {
+    <div className="connectMain">
+      {connectLogos.map((logo) => {
         return (
           <div className="logo logoConnect" key={logo.id}>
             <img onClick={() => dispatch(connect)} src={logo.image} alt={logo.name} />
           </div>
         );
-       })}
-      </div>
+      })}
     </div>
   );
 }

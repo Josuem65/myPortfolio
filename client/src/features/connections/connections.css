@@ -1,0 +1,14 @@
+.connectMain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+    background-color: #f5f5f5;
+}
+
+.logoConnect {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    display: block;
+}
