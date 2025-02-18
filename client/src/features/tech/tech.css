@@ -1,28 +1,42 @@
 /* techMain class is a parent class with a max height of 15vh, it should contain its child elements in a row with no wrap*/
 /*techMain should contain and resize its image children to fit the parent container*/
 .techMain {
-    border: 1px dotted red;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    max-height: 10em;  
-    margin-top: 5vh;
-  }
+  /* border: 1px dotted red; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-height: 10em;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vh;
+}
+.techLogoBox {
+  /* border: 1px dotted rgb(255, 89, 0); */
+  margin: 0 8%;
+  height: 5em;
+  width: 5em;
+  min-width: 2em;
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.116) 0%, rgba(255,255,255,0) 70%);
+  position: relative;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s ease-in-out;
+}
 
-  .logoContainer {
-    border: 1px dotted rgb(255, 89, 0);
-    max-height: 10vh;
-    max-width: 10vh;
-  }
+.techLogoBox:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+}
 
-  .logoContainer p {
-    margin-bottom: .5em;
+  .techLogoBox p {
+    /* border: 1px dotted green; */
+    height: 1em;
+    /* margin-bottom: .5em; */
   }
 
   .techLogo {
-    border: 1px dotted yellow;
-    max-height: 10vh;
-    max-width: 10vh;
-    object-fit: contain;
+    /* border: 1px dotted yellow; */
+    height: 4em;
+    /* object-fit: contain; */
   }

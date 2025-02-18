@@ -12,8 +12,8 @@ export function Connections() {
     <div className="connectMain">
       {connectLogos.map((logo) => {
         return (
-          <div className="logo logoConnect" key={logo.id}>
-            <img onClick={() => dispatch(connect)} src={logo.image} alt={logo.name} />
+          <div className="connectLogoBox" key={logo.id}>
+            <img className="logo" onClick={() => dispatch(connect)} src={logo.image} alt={logo.name} />
           </div>
         );
       })}

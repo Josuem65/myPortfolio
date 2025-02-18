@@ -1,7 +1,9 @@
 .App {
   text-align: center;
   z-index: -1;
-  background-color: rgb(34, 34, 34);;
+  background-color: rgb(34, 34, 34);
+  aspect-ratio: 16/9;
+  max-width: 100%;
 }
 
 /* .text {
