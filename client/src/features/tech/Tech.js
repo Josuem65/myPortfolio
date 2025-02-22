@@ -13,7 +13,7 @@ export function Tech() {
         return (
           <div className="techLogoBox" key={logo.id}>
             <p>{logo.tech}</p>
-            <img class="techLogo" src={logo.image} alt={logo.name} />
+            <img src={logo.image} alt={logo.name} />
           </div>
         );
       })}
