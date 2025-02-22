@@ -7,8 +7,9 @@ export function Connections() {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
-
+  
   return (
+    //         ADD LEETCODE USERNAME TO THIS SOON!!!!!!
     <div className="connectMain">
       <h1>Connect</h1>
       {connectLogos.map((logo) => {
@@ -39,3 +40,4 @@ export function Connections() {
     </div>
   );
 }
+

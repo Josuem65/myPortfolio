@@ -34,6 +34,13 @@
 .connectText {
     width: 30%;
     height: 50%;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.connectText p {
+    border: 1px dotted gray
 }
 
 .connectBox {
