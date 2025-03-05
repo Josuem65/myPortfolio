@@ -7,6 +7,10 @@ export function Connections() {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
+
+  const connectPath = (logo) => {
+    window.open(logo.link, "_blank");
+  }
   
   return (
     //         ADD LEETCODE USERNAME TO THIS SOON!!!!!!
@@ -18,13 +22,14 @@ export function Connections() {
             <div className="connectBox" key={logo.id}>
               <div className="profilePicContainer">
                 <img src={logo.profileURL} alt={logo.caption} />
-              </div>
+              </div>   
               <div className="logoContainer">
-                <img onClick={() => dispatch(connect)} src={logo.image} alt={logo.name} />
+                <img className={logo.id === 1 ? 'gitHubLogo': null} onClick={() => connectPath(logo)} src={logo.image} alt={logo.name} />
+                <p className="connectPath" onClick={() => connectPath(logo)}>{logo.profilePath} </p>
               </div>
-              <div className="followBtn">
-                <div>Follow +</div>
-              </div>
+              {/* <div className="followDiv">
+                <div className="followBtn">Follow +</div>
+              </div> */}
             </div>
             <div className="connectText">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et

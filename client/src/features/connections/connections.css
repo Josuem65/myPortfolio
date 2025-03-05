@@ -19,6 +19,12 @@
     align-items: center;
     align-self: flex-start;
     margin-left: 2vw;
+    font-family: 'Big Shoulders', sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 3em;
+    letter-spacing: 0.1em; /* Added space between letters */
 }
 
 .connectContainer {
@@ -86,7 +92,31 @@
     justify-content: center;
 }
 
-.followBtn {
+.logoContainer img {
+    height: 80%;
+    margin: auto 0 auto auto;
+}
+
+.logoContainer:hover {
+    cursor: pointer;
+}
+
+.gitHubLogo {
+    border-radius: 50%;
+    border: 1px solid rgb(0, 0, 0);
+    background-color: rgb(224, 224, 224);
+}
+
+.connectPath {
+    font-family: 'Big Shoulders', sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.5em;
+    margin: auto auto auto 5px;
+  }
+
+.followDiv {
     border: 1px solid rgb(180, 0, 0);
     width: 100%;
     height: 10%;
@@ -95,13 +125,19 @@
     align-items: center;
 }
 
-.followBtn div {
-    border: 1px solid rgb(20, 27, 51);
-    width: 10%;
-    height: 75%;
+.followBtn {
+    border: 2px solid rgb(0, 38, 74);
+    border-radius: 6px;
+    width: 18%;
+    height: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: rgba(0, 43, 83, 0.788);
+    background-color: rgba(70, 142, 193, 0.844);
+    background: linear-gradient(to bottom, rgba(138, 199, 243, 0.844) 5%,rgba(105, 193, 255, 0.844));
+    font-family: sans-serif;
+    font-weight: 600;
 }
 
 

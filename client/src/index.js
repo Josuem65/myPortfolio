@@ -11,9 +11,12 @@ const root = createRoot(container);
 
 //<React.StrictMode>...</React.StrictMode> tags were removed temporary to remove twice rendering of the app.
 root.render(
-    <Provider store={store}>
-      <App />
-    </Provider>
+  <Provider store={store}>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&display=swap');
+    </style>
+    <App />
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
