@@ -22,11 +22,13 @@
   padding-bottom: 4px;
 }
 
-/* position navItem at the bottom of its container div*/
-
 .navItem {
   margin-top: 1.5em;
-  font-family: sans-serif;
+  font-family: 'Big Shoulders', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  flex-shrink: 0; /* Prevent shrinking when the window width gets smaller */
 }
 
 .navItem:hover {
@@ -36,7 +38,18 @@
 
 .homeNav {
   margin-right: 60%;
-  
+}
+
+@media (max-width: 768px) {
+  .homeNav {
+    margin-right: 40%;
+  }
+}
+
+@media (max-width: 480px) {
+  .homeNav {
+    margin-right: 10%;
+  }
 }
 
 @media (max-width: 768px) and (pointer: coarse) {

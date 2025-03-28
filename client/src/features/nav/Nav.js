@@ -1,39 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCount } from './navSlice';
 import { selectTogglePopup, togglePopup } from '../popup/popupSlice';
 import styles from './nav.css';
+import { tilesRef } from '../tiles/Tiles';
+import { techRef } from '../tech/Tech';
+import { connectRef } from '../connections/Connections';
+import { buyMeCoffeeRef } from '../buyMeACoffee/BuyMeACoffee';
 
 export function Nav() {
   const count = useSelector(selectCount);
   const popupStatus = useSelector(selectTogglePopup);
   const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
-
-  const navList = ['myPortfolio', 'Related', 'Technology', 'Buy me a coffee'];
-  //'myPortfolio' = home button, 'Related' = related connections, 'Technology' = tech stack, 'Buy me a coffee' = donation button
+  const navList = ['myPortfolio', 'Tech Stack', 'Connect', 'Buy me a coffee'];
   
-  // const scrollToTop = () => {  // helper function
-  //   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // }
+  const handleNavClick = (section) => {
+    let ref;
+    switch (section) {
+      case 'myPortfolio':
+        ref = tilesRef;
+        break;
+      case 'Tech Stack':
+        ref = techRef;
+        break;
+      case 'Connect':
+        ref = connectRef;
+        break;
+      case 'Buy me a coffee':
+        ref = buyMeCoffeeRef;
+        break;
+      default:
+        return;
+    }
 
-  // const goToHome = () => {  // helper function
-  //   // go to top of the page without refreshing the page
-  //   window.scrollTo(0, 0);
-  // }
-  const handleHomeClick = () => { 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (ref?.current) {
+      const offset = -55; // Adjust this value based on your header height
+      const elementPosition = ref.current.getBoundingClientRect().top + window.scrollY + offset;
+      window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+    }
     return popupStatus ? dispatch(togglePopup()) : null;
-  }
-  
+  };
 
   return (
-    <div>
       <div className="mainNav">
-        {navList.map((item) => {
-          return <div onClick={handleHomeClick} className={item === 'myPortfolio' ? "navItem homeNav" : "navItem"} key={Math.random(32)}>{item}</div>
-        })}
+        {navList.map((item) => (
+          <div
+            onClick={() => handleNavClick(item)}
+            className={item === 'myPortfolio' ? "navItem homeNav" : "navItem navOptions"}
+            key={Math.random(32)}
+          >
+            {item}
+          </div>
+        ))}
       </div>
-    </div>
   );
 }

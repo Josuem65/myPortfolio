@@ -1,6 +1,30 @@
 /* techMain class is a parent class with a max height of 15vh, it should contain its child elements in a row with no wrap*/
 /*techMain should contain and resize its image children to fit the parent container*/
 .techMain {
+  border: 1px dashed rgb(8, 255, 8);
+  display: flex;
+  flex-direction: column;
+}
+
+.techMain h1 {
+  border: 1px dotted rgb(255, 225, 0);
+  text-align: center;
+  height: 10vw;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  align-self: flex-start;
+  margin-left: 2vw;
+  font-family: 'Big Shoulders', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 3em;
+  letter-spacing: 0.1em; /* Added space between letters */
+  margin-bottom: 0;
+}
+
+.techContainer {
   border: 1px dotted red;
   display: flex;
   flex-wrap: wrap;
@@ -10,10 +34,10 @@
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5vh;
 }
+
 .techLogoBox {
-  border: 1px dotted rgb(255, 89, 0);
+  border: 1px dotted rgb(4, 255, 0);
   margin: 0 8%;
   max-height: 5vw;
   width: 4.2vw;

@@ -4,7 +4,10 @@ import { selectCount } from './tilesSlice';
 import { togglePopup } from '../popup/popupSlice';
 import tileImgList from '../../images.js';
 
+export const tilesRef = React.createRef();
+
 export function Tiles() {
+  const localTilesRef = useRef(null); // Local reference inside the component
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
@@ -12,6 +15,10 @@ export function Tiles() {
   const tilesMainRef = useRef(null);
   const tileRefs = useRef([]);
   const boxRef = useRef(null);
+
+  useEffect(() => {
+    tilesRef.current = localTilesRef.current; // Assign the local reference to the exported reference
+  }, []);
 
   const checkOverflow = () => {
     if (tilesMainRef.current) {
@@ -87,7 +94,7 @@ export function Tiles() {
   }
 
   return (
-    <div className={isOverflowing ? 'tilesMainWrapper scrollBarTrue' : 'tilesMainWrapper'}>
+    <div ref={localTilesRef} className={isOverflowing ? 'tilesMainWrapper scrollBarTrue' : 'tilesMainWrapper'}>
       <div className="tilesMain" ref={tilesMainRef}>
         {tileImgList.map((item, index) => {
           return <div className="tile"

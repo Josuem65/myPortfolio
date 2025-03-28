@@ -1,27 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCount } from './connectionsSlice';
-import connectLogos from './connectLogos';
+import connectObj from './connectLogos';
+
+export const connectRef = React.createRef();
 
 export function Connections() {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
+  const localConnectRef = useRef(null);
+
+  useEffect(() => {
+    connectRef.current = localConnectRef.current; // Assign the local reference to the exported reference
+  }, []);
 
   const connectPath = (logo) => {
     window.open(logo.link, "_blank");
-  }
+  };
   
   return (
     //         ADD LEETCODE USERNAME TO THIS SOON!!!!!!
-    <div className="connectMain">
+    <div ref={localConnectRef} className="connectMain">
       <h1>Connect</h1>
-      {connectLogos.map((logo) => {
+      {connectObj.map((logo) => {
         return (
-          <div className="connectContainer">
-            <div className="connectBox" key={logo.id}>
+          <div className="connectContainer" key={logo.id}>
+            <div className="connectBox">
               <div className="profilePicContainer">
-                <img src={logo.profileURL} alt={logo.caption} />
+                <img src={logo.profileURL} alt={logo.caption} onClick={() => connectPath(logo)} />
               </div>   
               <div className="logoContainer">
                 <img className={logo.id === 1 ? 'gitHubLogo': null} onClick={() => connectPath(logo)} src={logo.image} alt={logo.name} />
@@ -32,12 +39,7 @@ export function Connections() {
               </div> */}
             </div>
             <div className="connectText">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                mollit anim id est laborum.
-              </p>
+              <p>{logo.paragraph}</p>
             </div>
           </div>
         );
@@ -45,4 +47,3 @@ export function Connections() {
     </div>
   );
 }
-
