@@ -1,4 +1,5 @@
 .connectMain {
+    position: relative;
     border: 3px dotted rgb(0, 56, 13);
     display: flex;
     flex-direction: column;

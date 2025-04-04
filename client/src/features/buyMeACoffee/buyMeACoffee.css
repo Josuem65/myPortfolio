@@ -1,4 +1,5 @@
 .coffeeMain {
+    position: relative;
     height:15vh;
     background-color: rgb(148, 110, 110);
 }

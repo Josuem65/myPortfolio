@@ -2,25 +2,49 @@
 /* make contentMain contain content, and content contain contentTile img*/
 
 .contentMain {
+  position: sticky; /* Make it sticky */
+  top: 3.5em; /* Stick to the top of the viewport */
   margin-top: 3em;
   width: auto;
-  height: 60vh;
+  height: 100vh;
+  z-index: 0; /* Ensure it is visible */
+  background: rgba(0, 0, 0, 0.1); /* Optional: Add a background for visibility */
 }
 
 /* make contentTile img stay contained within its parent div, contentImg's parent is .content*/
 
-.content {
+/* .content {
+  border: 1px dashed yellow;
   width: 100%;
   height: 100%;
+} */
+
+.contentDiv {
+  height: 100%;
+  width: 100%;
+  position: relative; /* Ensure child elements are positioned relative to this container */
+  z-index: 1; /* Ensure it is above .contentMain */
 }
 
-.contentTile {
-  height: 100%;
-  width: 100%;
+.contentDiv img {
+  object-fit: cover; /* Ensures the image covers the container while maintaining aspect ratio */
+  width: 100%; /* Full width of the container */
+  height: 100%; /* Full height of the container */
+  z-index: 1; /* Ensure it is above .contentMain */
+  position: absolute; /* Position it within .contentDiv */
+  top: 0;
+  left: 0;
 }
 
-.contentTile img {
-  object-fit: cover;
-  height: 100%;
+.imageFilm {
+  position: absolute; /* Stack on top of .contentDiv img */
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0); /* Start fully transparent */
+  z-index: 2; /* Ensure it stacks above the image */
+  pointer-events: none; /* Prevent interaction with this layer */
+  transition: background-color 0.1s ease, backdrop-filter 0.1s ease; /* Smooth transition for opacity and blur changes */
+  backdrop-filter: blur(0px); /* Start with no blur */
 }

@@ -94,8 +94,8 @@ export function Tiles() {
   }
 
   return (
-    <div ref={localTilesRef} className={isOverflowing ? 'tilesMainWrapper scrollBarTrue' : 'tilesMainWrapper'}>
-      <div className="tilesMain" ref={tilesMainRef}>
+    <div ref={localTilesRef} className="tilesMainWrapper">
+      <div className={isOverflowing ? 'tilesMain scrollBarTrue' : 'tilesMain'} ref={tilesMainRef}>
         {tileImgList.map((item, index) => {
           return <div className="tile"
             ref={(element) => tileRefHandler(element, index)}
