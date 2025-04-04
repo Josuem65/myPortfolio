@@ -1,9 +1,10 @@
 @media (min-width: 769px) {
 
     .tilesMainWrapper {
-        border: 1px dashed white;
+        /* border: 1px dashed white; */
         width: 100%;
         background: rgba(26, 26, 26, 0.085); /* Dark background for contrast */
+        overflow: hidden; /* Prevent scrollbar from sticking out of border-radius */
     }
 
     .tilesMain {
@@ -15,10 +16,12 @@
         width: 100%;
         height: 100%; 
         min-height: 160px;
+        border-radius: 20px; /* Ensure border-radius is applied */
         /* min-width: 25%; */
-        border: 1px dotted rgb(220, 18, 18);
+        /* border: 1px dotted rgb(220, 18, 18); */
         overflow-x: auto; /* Make .tilesMain scrollable horizontally */
         overflow-y: hidden; /* Hide y-axis scrollbar */
+        clip-path: inset(0 round 20px); /* Clip content to match border-radius */
         position: relative;
         /* make background a bit transparent*/
         background: rgba(26, 26, 26, 0.881); /* Dark background for contrast */

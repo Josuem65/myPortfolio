@@ -2,13 +2,13 @@
 /*techMain should contain and resize its image children to fit the parent container*/
 .techMain {
   position: relative;
-  border: 1px dashed rgb(8, 255, 8);
+  /* border: 1px dashed rgb(8, 255, 8); */
   display: flex;
   flex-direction: column;
 }
 
 .techMain h1 {
-  border: 1px dotted rgb(255, 225, 0);
+  /* border: 1px dotted rgb(255, 225, 0); */
   text-align: center;
   height: 10vw;
   display: flex;
@@ -26,7 +26,7 @@
 }
 
 .techContainer {
-  border: 1px dotted red;
+  /* border: 1px dotted red; */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -38,7 +38,7 @@
 }
 
 .techLogoBox {
-  border: 1px dotted rgb(4, 255, 0);
+  /* border: 1px dotted rgb(4, 255, 0); */
   margin: 0 8%;
   max-height: 5vw;
   width: 4.2vw;
