@@ -5,6 +5,7 @@
         width: 100%;
         background: rgba(26, 26, 26, 0.085); /* Dark background for contrast */
         overflow: hidden; /* Prevent scrollbar from sticking out of border-radius */
+        margin-bottom: 12vh;
     }
 
     .tilesMain {

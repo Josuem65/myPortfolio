@@ -13,6 +13,21 @@ export function Connections() {
 
   useEffect(() => {
     connectRef.current = localConnectRef.current; // Assign the local reference to the exported reference
+
+    const updateHeight = () => {
+      const connectMain = localConnectRef.current;
+      if (connectMain) {
+        const width = connectMain.offsetWidth;
+        connectMain.style.height = `${Math.max(width * 0.75, connectMain.scrollHeight)}px`; // Set height to 75% of width or content height
+      }
+    };
+
+    updateHeight(); // Set initial height
+    window.addEventListener('resize', updateHeight); // Update height on window resize
+
+    return () => {
+      window.removeEventListener('resize', updateHeight);
+    };
   }, []);
 
   const connectPath = (logo) => {
