@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { isMobileOnly } from 'react-device-detect';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCount } from './tilesSlice';
 import { togglePopup } from '../popup/popupSlice';
@@ -92,10 +93,10 @@ export function Tiles() {
   const tileRefHandler = (element, index) => {
     tileRefs.current[index] = element;
   }
-
+console.log('isMobileOnly', isMobileOnly)
   return (
     <div ref={localTilesRef} className="tilesMainWrapper">
-      <div className={isOverflowing ? 'tilesMain scrollBarTrue' : 'tilesMain'} ref={tilesMainRef}>
+      <div className={isMobileOnly ? 'mobileTilesMain' : 'tilesMain'} ref={tilesMainRef}>
         {tileImgList.map((item, index) => {
           return <div className="tile"
             ref={(element) => tileRefHandler(element, index)}

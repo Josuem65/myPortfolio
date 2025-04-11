@@ -1,7 +1,7 @@
 @media (min-width: 769px) {
 
     .tilesMainWrapper {
-        /* border: 1px dashed white; */
+        border: 1px dashed white;
         width: 100%;
         background: rgba(26, 26, 26, 0.085); /* Dark background for contrast */
         overflow: hidden; /* Prevent scrollbar from sticking out of border-radius */
@@ -19,8 +19,8 @@
         min-height: 160px;
         border-radius: 20px; /* Ensure border-radius is applied */
         /* min-width: 25%; */
-        /* border: 1px dotted rgb(220, 18, 18); */
-        overflow-x: auto; /* Make .tilesMain scrollable horizontally */
+        border: 1px dotted rgb(220, 18, 18);
+        overflow-x: scroll; /* Make .tilesMain scrollable horizontally */
         overflow-y: hidden; /* Hide y-axis scrollbar */
         clip-path: inset(0 round 20px); /* Clip content to match border-radius */
         position: relative;
@@ -33,22 +33,22 @@
     }
 
     /* Custom scrollbar for Webkit browsers */
-    .scrollBarTrue::-webkit-scrollbar {
+    .tilesMain::-webkit-scrollbar {
         width: 8px;
         height: 5px;
     }
 
-    .scrollBarTrue::-webkit-scrollbar-track {
+    .tilesMain::-webkit-scrollbar-track {
         background: rgba(0, 0, 0, 0.362);
     }
 
-    .scrollBarTrue::-webkit-scrollbar-thumb {
+    .tilesMain::-webkit-scrollbar-thumb {
         background: rgb(54, 54, 54);
         border-radius: 10px;
     }
     
     .tile {
-        /* border: 1px dotted yellow; */
+        border: 1px dotted yellow;
         border-radius: 20px;
         transform: scale(.8);
         transition: .5s ease;
@@ -117,8 +117,8 @@
 
 /* Center tiles vertically, it's too close to the top  */
 
-/* Media query for mobile devices */
-@media (max-width: 768px) and (pointer: coarse) {
+/* Media query for smaller desktop windows*/
+@media (max-width: 768px) {
 
     /* make tilesMain's children scrollable horizontally*/
     /* tilesMain must contain content within its set height*/
@@ -173,12 +173,21 @@
         transition: 0.3s ease;
         box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.5);      
     } */
-      /* redBox needs to have a negative z-index and have an display of absolute to represent the rootMargin in our intersectionObserver*/
-      .redBox {
-          position: absolute;
-          width: 300px;
-          background-color: rgba(255, 0, 0, 0.253);
-          height: 100%;
-          top: 430px;
-          z-index: 1;
-      }
+  
+
+
+
+
+/*          M O B I L E   S T Y L I N G          */
+
+.mobileTilesMain {
+        display: block;
+        width: 100%;
+        height: 97vh;
+        border: 10px dotted rgb(235, 225, 225);
+        overflow-y: hidden;
+        overflow-x: scroll;
+        white-space: nowrap;
+        padding: 0 150px;
+        z-index: 150;
+}

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { isMobileOnly } from 'react-device-detect';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCount } from './navSlice';
 import { selectTogglePopup, togglePopup } from '../popup/popupSlice';
@@ -7,6 +8,8 @@ import { tilesRef } from '../tiles/Tiles';
 import { techRef } from '../tech/Tech';
 import { connectRef } from '../connections/Connections';
 import { buyMeCoffeeRef } from '../buyMeACoffee/BuyMeACoffee';
+
+// Mobile only styles needed for the nav bar
 
 export function Nav() {
   const count = useSelector(selectCount);
@@ -42,7 +45,7 @@ export function Nav() {
   };
 
   return (
-      <div className="mainNav">
+      <div className={isMobileOnly ? "mainNav" : "mainNav desktopNav"}>
         {navList.map((item) => (
           <div
             onClick={() => handleNavClick(item)}
