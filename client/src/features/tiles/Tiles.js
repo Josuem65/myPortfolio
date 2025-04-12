@@ -43,17 +43,17 @@ export function Tiles() {
         thresholdArr.push(i);
       }
 
-      let tileCount = 0; 
-      let prevTile = null;
-      tileRefs.current.forEach((tile, index) => {  
-        if (tileCount < tileRefs.current.length) {
-          prevTile != null ? prevTile.next = tile : null;
-          tile.prev = prevTile;
-          tile.next = null;
-          prevTile = tile;
-          tileCount++;
-        }
-      });
+      // let tileCount = 0; 
+      // let prevTile = null;
+      // tileRefs.current.forEach((tile, index) => {  
+      //   if (tileCount < tileRefs.current.length) {
+      //     prevTile != null ? prevTile.next = tile : null;
+      //     tile.prev = prevTile;
+      //     tile.next = null;
+      //     prevTile = tile;
+      //     tileCount++;
+      //   }
+      // });
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -68,7 +68,7 @@ export function Tiles() {
           if (entry.isIntersecting) {
             tile.classList.add('transformTile');
             img.style.transform = `scale(${scale(1, .2)})`;
-            tile.style.margin = `auto ${scale(10, 10)}px`;
+            tile.style.margin = `auto ${scale(20, 10)}px`;
           } else {
             tile.classList.remove('transformTile');
           }
@@ -95,10 +95,10 @@ export function Tiles() {
   }
 console.log('isMobileOnly', isMobileOnly)
   return (
-    <div ref={localTilesRef} className="tilesMainWrapper">
+    <div ref={localTilesRef} className={isMobileOnly ? 'mobileTilesWrapper' : "tilesWrapper"}>
       <div className={isMobileOnly ? 'mobileTilesMain' : 'tilesMain'} ref={tilesMainRef}>
         {tileImgList.map((item, index) => {
-          return <div className="tile"
+          return <div className={isMobileOnly ? 'mobileTile' : 'tile'}
             ref={(element) => tileRefHandler(element, index)}
             onClick={() => openInNewTab(item.url)}
             key={item.id}>

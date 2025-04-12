@@ -63,7 +63,7 @@
 
 /*    M O B I L E   S T Y L I N G    */
 
-/* .mobileMainNav {
+.mobileMainNav {
   position: fixed;
   top: 0;
   width: 100%;
@@ -74,4 +74,4 @@
   display: flex;
   justify-content: space-around;
   padding-bottom: 4px;
-} */
+}
