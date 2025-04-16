@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { isMobileOnly } from 'react-device-detect';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCount } from './connectionsSlice';
 import connectObj from './connectLogos';
@@ -36,11 +37,11 @@ export function Connections() {
   
   return (
     //         ADD LEETCODE USERNAME TO THIS SOON!!!!!!
-    <div ref={localConnectRef} className="connectMain">
+    <div ref={localConnectRef} className={isMobileOnly ? "mobileConnectMain connectMain" : "connectMain"}>
       <h1>Connect</h1>
       {connectObj.map((logo) => {
         return (
-          <div className="connectContainer" key={logo.id}>
+          <div className={isMobileOnly ? "mobileConnectContainer connectContainer": "connectContainer"} key={logo.id}>
             <div className="connectBox">
               <div className="profilePicContainer">
                 <img src={logo.profileURL} alt={logo.caption} onClick={() => connectPath(logo)} />
