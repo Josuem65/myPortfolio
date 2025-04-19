@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import BuyMeACoffeeButton from '../../logos/BuyMeACoffeeButton.png';
 
 export const buyMeCoffeeRef = React.createRef();
 
@@ -12,7 +13,7 @@ export function BuyMeACoffee() {
   return (
     <div ref={localBuyMeCoffeeRef} className="buyMeCoffeeSection">
       <div className="coffeeMain">
-        <h1>Buy me a coffee</h1>
+        <img src={BuyMeACoffeeButton} alt="BuyMeACoffeeButton" />
       </div>
     </div>
   );

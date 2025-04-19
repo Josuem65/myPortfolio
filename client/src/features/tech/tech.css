@@ -2,7 +2,7 @@
 /*techMain should contain and resize its image children to fit the parent container*/
 .techMain {
   position: relative;
-  /* border: 1px dashed rgb(8, 255, 8); */
+  border: 1px dashed rgb(8, 255, 8);
   display: flex;
   flex-direction: column;
 }

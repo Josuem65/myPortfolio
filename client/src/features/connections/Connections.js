@@ -38,7 +38,7 @@ export function Connections() {
   return (
     //         ADD LEETCODE USERNAME TO THIS SOON!!!!!!
     <div ref={localConnectRef} className={isMobileOnly ? "mobileConnectMain connectMain" : "connectMain"}>
-      <h1>Connect</h1>
+      <h1>Let's Connect</h1>
       {connectObj.map((logo) => {
         return (
           <div className={isMobileOnly ? "mobileConnectContainer connectContainer": "connectContainer"} key={logo.id}>

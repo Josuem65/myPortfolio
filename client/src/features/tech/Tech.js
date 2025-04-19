@@ -16,7 +16,7 @@ export function Tech() {
 
   return (
     <div ref={localTechRef} className="techMain">
-      <h1>Tech</h1>
+      <h1>Tech Stack</h1>
       <div className="techContainer">
         {techLogos.map((logo) => {
           return (
