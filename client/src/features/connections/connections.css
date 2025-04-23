@@ -9,7 +9,7 @@
     height: auto; /* Allow height to grow dynamically */
     /* aspect-ratio: unset; Remove fixed aspect ratio */
     background-color: transparent;
-    margin: 10vw auto 15% auto;
+    margin: 10vw auto 15vw auto;
     z-index: 4;
     box-sizing: border-box; /* Include padding and borders in calculations */
     overflow: visible; /* Ensure children are not clipped */
