@@ -48,3 +48,15 @@
   transition: background-color 0.1s ease, backdrop-filter 0.1s ease; /* Smooth transition for opacity and blur changes */
   backdrop-filter: blur(0px); /* Start with no blur */
 }
+
+.profilePicture {
+  z-index: 3;
+  width: 80px; /* Set width equal to height for a circular shape */
+  height: 80px; /* Set height to 40vh */
+  border-radius: 50%; /* Make it circular */
+  overflow: hidden; /* Ensure content stays within the circle */
+  display: flex; /* Center content inside the circle */
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.1); /* Optional: Add a background color */
+}
