@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { isMobileOnly } from 'react-device-detect';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCount } from './techSlice';
 import techLogos from './techLogos';
@@ -17,10 +18,10 @@ export function Tech() {
   return (
     <div ref={localTechRef} className="techMain">
       <h1>Tech Stack</h1>
-      <div className="techContainer">
+      <div className={isMobileOnly ? "mobileTechContainer techContainer" : "techContainer"}>
         {techLogos.map((logo) => {
           return (
-            <div className="techLogoBox" key={logo.id}>
+            <div className={isMobileOnly ? "mobileTechLogoBox techLogoBox" : "techLogoBox"} key={logo.id}>
               <p>{logo.tech}</p>
               <img src={logo.image} alt={logo.name} />
             </div>

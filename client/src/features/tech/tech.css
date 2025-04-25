@@ -5,6 +5,7 @@
   border: 1px dashed rgb(8, 255, 8);
   display: flex;
   flex-direction: column;
+  height: auto;
 }
 
 .techMain h1 {
@@ -22,7 +23,7 @@
   font-style: normal;
   font-size: 3em;
   letter-spacing: 0.1em; /* Added space between letters */
-  margin-bottom: 0;
+  margin-bottom: 1em; /* Add some space below the title */;
 }
 
 .techContainer {
@@ -31,8 +32,9 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  max-height: 10vw;
   width: 100%;
+  height: auto;
+  max-height: 10vw;
   margin-left: auto;
   margin-right: auto;
 }
@@ -49,20 +51,52 @@
   /* transition: transform 0.3s ease-in-out; */
 }
 
-/* .techLogoBox:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-} */
+.techLogoBox p {
+  /* border: 1px dotted green; */
+  max-height: 1vw;
+  font-size: x-small;
+  /* margin-bottom: .5em; */
+}
+.techLogoBox img {
+  /* border: 1px dotted yellow; */
+  max-height: 3vw;
+  /* object-fit: contain; */
+}
 
-  .techLogoBox p {
-    /* border: 1px dotted green; */
-    max-height: 1vw;
-    font-size: x-small;
-    /* margin-bottom: .5em; */
-  }
 
-  .techLogoBox img {
-    /* border: 1px dotted yellow; */
-    max-height: 3vw;
-    /* object-fit: contain; */
-  }
+
+
+
+/*            M O B I L E    S T Y L I N G        */
+
+.mobileTechContainer.techContainer {
+  border: 1px dotted rgb(255, 255, 255);
+  justify-content: space-around;
+  min-height: 15vw;
+  height: min(15vw, 25vw);
+  /* max-height: 30vw; */
+}
+
+.mobileTechLogoBox.techLogoBox {
+  border: 1px dotted rgb(255, 0, 0);
+  display: flex; /* Ensure children are aligned properly */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center children vertically */
+  align-items: center; /* Center children horizontally */
+  height: 15vw;
+  width: auto;
+  margin: 0 2%;
+}
+
+.mobileTechLogoBox.techLogoBox p {
+  height: 1em;
+  font-size: 1em;
+  /* margin-bottom: 0.5em; */
+}
+
+.mobileTechLogoBox.techLogoBox img {
+  max-height: 12vw;
+  width: auto;
+  /* margin: auto; */
+  object-fit: contain;
+}

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import contentList from '../../contentImgs.js';
-import connectObj from '../connections/connectLogos.js';
 
 export function Content() {
   useEffect(() => {
@@ -30,10 +29,6 @@ export function Content() {
           <div className="contentDiv" key={item.id}>
             <div className="imageFilm"></div>
             <img src={item.image} alt={item.name} />
-            <div className="profilePicture">
-              <img src={connectObj[1].profileURL} alt="Creator's profile picture" />
-              <h1>Josue Martinez</h1>
-            </div>
           </div>
         );
       })}

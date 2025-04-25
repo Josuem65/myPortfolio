@@ -31,6 +31,7 @@
     font-style: normal;
     font-size: 3em;
     letter-spacing: 0.1em; /* Added space between letters */
+    margin-bottom: 1em; /* Add some space below the title */
 }
 
 .connectContainer {

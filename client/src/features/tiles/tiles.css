@@ -1,14 +1,34 @@
 /* @media (min-width: 769px) { */
 
     .tilesWrapper {
-        border: 10px dashed white;
+        /* border: 1px dashed yellow; */
+        position: relative;
         width: 100%;
-        background: rgba(26, 26, 26, 0.085); /* Dark background for contrast */
-        overflow: hidden; /* Prevent scrollbar from sticking out of border-radius */
+        height: auto;
         margin-bottom: 12vh;
     }
 
+    .tilesWrapper h1 {
+        /* border: 1px dashed rgb(255, 255, 255); */
+        text-align: center;
+        height: 10vw;
+        display: flex;
+        /* justify-content: center; */
+        align-items: center;
+        align-self: flex-start;
+        margin-left: 2vw;
+        font-family: 'Big Shoulders', sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 3em;
+        letter-spacing: 0.1em; /* Added space between letters */
+        margin-bottom: 1em; /* Add some space below the title */
+    }
+
     .tilesMain {
+        /* border: 1px dotted rgb(220, 18, 18); */
+        position: relative;
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
@@ -19,11 +39,9 @@
         min-height: 160px;
         border-radius: 20px; /* Ensure border-radius is applied */
         /* min-width: 25%; */
-        /* border: 1px dotted rgb(220, 18, 18); */
         overflow-x: scroll; /* Make .tilesMain scrollable horizontally */
         overflow-y: hidden; /* Hide y-axis scrollbar */
         clip-path: inset(0 round 20px); /* Clip content to match border-radius */
-        position: relative;
         /* make background a bit transparent*/
         background: rgba(0, 0, 0, 0.525); /* Dark background for contrast */
         height: 15em;
