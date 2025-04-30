@@ -1,7 +1,7 @@
 /* @media (min-width: 769px) { */
 
     .tilesWrapper {
-        /* border: 1px dashed yellow; */
+        border: 1px dashed yellow;
         position: relative;
         width: 100%;
         height: auto;
@@ -155,7 +155,7 @@
 .mobileTilesWrapper {
     border: 1px dashed yellow;
     height: 94vh;
-    margin-top: 3.5em;
+    margin-top: -15vh;
     width: 100%;
     z-index: 5;
 }

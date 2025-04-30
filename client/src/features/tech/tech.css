@@ -44,11 +44,9 @@
   margin: 0 8%;
   max-height: 5vw;
   width: 4.2vw;
-  /* min-width: 2em; */
   background: radial-gradient(circle at top, rgba(255, 255, 255, 0.116) 0%, rgba(21, 21, 21, 0.942) 70%);
   position: relative;
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-  /* transition: transform 0.3s ease-in-out; */
 }
 
 .techLogoBox p {
@@ -69,34 +67,64 @@
 
 /*            M O B I L E    S T Y L I N G        */
 
-.mobileTechContainer.techContainer {
-  border: 1px dotted rgb(255, 255, 255);
-  justify-content: space-around;
-  min-height: 15vw;
-  height: min(15vw, 25vw);
-  /* max-height: 30vw; */
+.mobileTechMain.techMain {
+  margin-bottom: 20vh;
 }
+
+.mobileTechContainer.techContainer {
+  /* border: 1px dotted rgb(255, 255, 255); */
+  max-height: none;
+  height: auto;
+  /* height:100px;
+  width: 100%; */
+  justify-content: space-around;
+  /* height: 100px;
+  max-height: 30vw;  */
+}
+
+/* display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+width: 100%;
+height: auto;
+margin-left: auto;
+margin-right: auto; */
 
 .mobileTechLogoBox.techLogoBox {
-  border: 1px dotted rgb(255, 0, 0);
-  display: flex; /* Ensure children are aligned properly */
-  flex-direction: column; /* Stack children vertically */
-  justify-content: center; /* Center children vertically */
-  align-items: center; /* Center children horizontally */
-  height: 15vw;
+  /* border: 1px dotted rgb(255, 0, 0); */
+  height: auto;
   width: auto;
-  margin: 0 2%;
+  max-height: none;
+  /* display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  height: auto;
+  width: auto;*/
+  margin: 1em 4%; 
 }
+  /* margin: 0 8%;
+  max-height: 5vw;
+  width: 4.2vw;
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.116) 0%, rgba(21, 21, 21, 0.942) 70%);
+  position: relative;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5); */
 
 .mobileTechLogoBox.techLogoBox p {
+  max-height: none;
   height: 1em;
   font-size: 1em;
   /* margin-bottom: 0.5em; */
 }
 
+/* max-height: 1vw;
+font-size: x-small; */
+
 .mobileTechLogoBox.techLogoBox img {
-  max-height: 12vw;
-  width: auto;
-  /* margin: auto; */
-  object-fit: contain;
+  max-height: none;
+  height: 15vw; /* Adjust this value as needed for your design */
+  width: 15vw; /* Adjust this value as needed for your design */
+  object-fit: contain; /* Ensure the image does not scale unexpectedly */
+  position: relative; /* Ensure it behaves as part of the document flow */
 }
