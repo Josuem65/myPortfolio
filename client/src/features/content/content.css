@@ -42,7 +42,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0); /* Start fully transparent */
+  background: rgba(0, 0, 0, 0.650); /* Start fully transparent */
   z-index: 2; /* Ensure it stacks above the image */
   pointer-events: none; /* Prevent interaction with this layer */
   transition: background-color 0.1s ease, backdrop-filter 0.1s ease; /* Smooth transition for opacity and blur changes */

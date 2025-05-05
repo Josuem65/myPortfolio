@@ -1,6 +1,6 @@
 import gitHub from '../../logos/gitHubLogo.png';
 import linkedIn from '../../logos/linkedInLogo.png';
-import profilePic from '../../profilePics/linkedInProfilePic.jpg';
+import profilePic from '../../profilePics/linkedInProfilePic_1.jpg';
 
 const connectObj = [
     {

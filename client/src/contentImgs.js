@@ -1,10 +1,10 @@
 import contentImg from './content-placeholder.jpg';
 
-const contentList = [
+const contentMedia = [
         {
             id: 1,
             name: 'code-background-img',
             image: contentImg,
         },
     ];
-export default contentList;
+export default contentMedia;
