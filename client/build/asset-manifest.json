@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.23c2a84f.css",
+    "main.js": "/static/js/main.d158df3e.js",
+    "static/js/488.5dc00adb.chunk.js": "/static/js/488.5dc00adb.chunk.js",
+    "static/media/skateShop.png": "/static/media/skateShop.9bc040b4598a38168972.png",
+    "static/media/linkedInProfilePic_1.jpg": "/static/media/linkedInProfilePic_1.29e353dcc5097439afec.jpg",
+    "static/media/photoAlbum.png": "/static/media/photoAlbum.0fa3569880e389e8e0ca.png",
+    "static/media/shoppingCart.png": "/static/media/shoppingCart.1cefe4d9a169fcc488f1.png",
+    "static/media/content-placeholder.jpg": "/static/media/content-placeholder.bcb53336de3025c4ef86.jpg",
+    "static/media/cssLogo.png": "/static/media/cssLogo.f492f5ab3d959d9ccbb8.png",
+    "static/media/calculator.png": "/static/media/calculator.7f91d1705e2be0276705.png",
+    "static/media/memoryGame.png": "/static/media/memoryGame.20e5ed757a15bb0729e0.png",
+    "static/media/gitHubLogo.png": "/static/media/gitHubLogo.9e0a1ad5b7392718f7bd.png",
+    "static/media/reactLogo.png": "/static/media/reactLogo.ef28a7569ef18dd72579.png",
+    "static/media/linkedInLogo.png": "/static/media/linkedInLogo.668fe687f5d2082add1c.png",
+    "static/media/nodeJsLogo.png": "/static/media/nodeJsLogo.e71346fe0fec16ec5f6e.png",
+    "static/media/reduxLogo.png": "/static/media/reduxLogo.1edba70acbe0a2484e24.png",
+    "static/media/gitLogo.png": "/static/media/gitLogo.dfdd0989ffe0184bdd68.png",
+    "static/media/BuyMeACoffeeButton.png": "/static/media/BuyMeACoffeeButton.618c3be91d89f482c8a5.png",
+    "static/media/javascriptLogo.png": "/static/media/javascriptLogo.dafbcd7fb56fcfce553c.png",
+    "index.html": "/index.html",
+    "main.23c2a84f.css.map": "/static/css/main.23c2a84f.css.map",
+    "main.d158df3e.js.map": "/static/js/main.d158df3e.js.map",
+    "488.5dc00adb.chunk.js.map": "/static/js/488.5dc00adb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.23c2a84f.css",
+    "static/js/main.d158df3e.js"
+  ]
+}
