@@ -96,7 +96,7 @@ export function Tiles() {
 console.log('isMobileOnly', isMobileOnly)
   return (
     <div ref={localTilesRef} className={isMobileOnly ? 'mobileTilesWrapper' : "tilesWrapper"}>
-      <h1>Deployed Projects</h1>
+      <h1 className="tilesHeader">Deployed Projects</h1>
       <div className={isMobileOnly ? 'mobileTilesMain' : 'tilesMain'} ref={tilesMainRef}>
         {tileImgList.map((item, index) => {
           return <div className={isMobileOnly ? 'mobileTile' : 'tile'}
