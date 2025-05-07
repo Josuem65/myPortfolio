@@ -50,9 +50,6 @@ export function Connections() {
                 <img className={logo.id === 1 ? 'gitHubLogo': null} onClick={() => connectPath(logo)} src={logo.image} alt={logo.name} />
                 <p className="connectPath" onClick={() => connectPath(logo)}>{logo.profilePath} </p>
               </div>
-              {/* <div className="followDiv">
-                <div className="followBtn">Follow +</div>
-              </div> */}
             </div>
             <div className="connectText">
               <p>{logo.paragraph}</p>
