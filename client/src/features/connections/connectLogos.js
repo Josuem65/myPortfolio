@@ -10,7 +10,7 @@ const connectObj = [
         link: 'https://github.com/Josuem65',
         image: gitHub,
         profileURL: "https://avatars.githubusercontent.com/u/66807970?v=4",
-        paragraph: "I've listed a few of my projects on this site ('myPortolio') but to see all of my projects, including what I'm currently working, click to the left to checkout my Github profile!",
+        paragraph: "I've listed a few of my projects on this site ('myPortolio') but to see all of my projects, including what I'm currently working on, click to the left to checkout my Github profile!",
     },
     {
         id: 2,
