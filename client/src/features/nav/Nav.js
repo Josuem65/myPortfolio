@@ -37,7 +37,7 @@ export function Nav() {
     }
 
     if (ref?.current) {
-      const offset = -55; // Adjust this value based on your header height
+      const offset = -80; // Adjust this value based on your header height
       const elementPosition = ref.current.getBoundingClientRect().top + window.scrollY + offset;
       window.scrollTo({ top: elementPosition, behavior: 'smooth' });
     }

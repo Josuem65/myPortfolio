@@ -37,11 +37,13 @@ export function Tiles() {
 
   useEffect(() => {
     const screenWidth = document.documentElement.clientWidth;
-    if (screenWidth < 769) {
+    if (isMobileOnly) {
       const thresholdArr = [];
       for (let i = 0; i <= 1; i += 0.01) {
         thresholdArr.push(i);
       }
+
+      //biderctional linked list
 
       // let tileCount = 0; 
       // let prevTile = null;
@@ -66,11 +68,8 @@ export function Tiles() {
           }
           
           if (entry.isIntersecting) {
-            tile.classList.add('transformTile');
-            img.style.transform = `scale(${scale(1, .2)})`;
-            tile.style.margin = `auto ${scale(20, 10)}px`;
-          } else {
-            tile.classList.remove('transformTile');
+            tile.style.transform = `scale(${scale(1, .3)})`;
+            // tile.style.margin = `auto ${scale(20, 10)}px`;
           }
         });
       },
@@ -104,9 +103,8 @@ console.log('isMobileOnly', isMobileOnly)
             onClick={() => openInNewTab(item.url)}
             key={item.id}>
             <p>{item.name}</p>
-            <img
-              className={'tileImg'}
-              src={item.image} />
+            <img className={'tileImg'} src={item.image} />
+            <p className="tileDetails">Details</p>
           </div>
         })}
       </div>

@@ -1,6 +1,5 @@
 .buyMeCoffeeSection {
     position: relative;
-    /* border: 1px dotted yellow; */
     height: 40vh;
     min-height: 40vw;
     width: 100%;
@@ -8,12 +7,10 @@
     max-width: 100vw; /* Ensure the width does not exceed the container */
     box-sizing: border-box; /* Include padding and borders in width calculations */
     margin-top: 10vw;
-
 }
 
 .coffeeMain {
     margin-top: 1.5em;
-    /* border: 1px dashed orange; */
 }
 
 /* .coffeeMain:hover {
@@ -39,14 +36,18 @@
 
 
 .coffeeText {
-    /* border: 1px dashed red; */
     height: auto;
     width: 50%;
     margin: 1.5em auto auto auto;
-    /* border: 1px dotted gray; */
     font-family: 'Big Shoulders', sans-serif;
-    /* font-weight: 700; */
-    letter-spacing: 0.1em; /*Increased space between letters*/
-    line-height: 1.5em; /*Increased space between lines*/
+    letter-spacing: 0.1em; /* Increased space between letters */
+    line-height: 1.5em; /* Increased space between lines */
     font-size: 1.2em;
+    overflow-y: scroll; /* Enable vertical scrolling */
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+}
+
+.coffeeText::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in WebKit browsers */
 }

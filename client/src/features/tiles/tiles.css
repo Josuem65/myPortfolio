@@ -100,6 +100,15 @@
         transition: .4s;
     }
 
+    .tile .tileDetails {
+        text-decoration: underline;
+        color: inherit; /* Keep the original text color */
+    }
+
+    .tile .tileDetails:hover {
+        color: rgb(98, 98, 255); 
+    }
+
 
 
 
@@ -110,10 +119,10 @@
 
 .mobileTilesWrapper {
     /* border: 1px dashed yellow; */
-    height: 94vh;
-    margin-top: -15vh;
+    position: relative;
+    height: 98vh;
+    margin-top: -5vh;
     width: 100%;
-    z-index: 5;
 }
 
 .mobileTilesMain {
@@ -130,9 +139,9 @@
     display: inline-block;
     width: 52%; /* Set width to 65% */
     aspect-ratio: 9 / 19; /* Define the aspect ratio */
-    margin: auto 0;
+    margin: auto 1.7em;
     color: rgb(228, 228, 228);
-    /* border: 1px solid rgb(77, 77, 180); */
+    border: 1px solid rgb(77, 77, 180);
     scroll-behavior: smooth;
 }
 
@@ -142,8 +151,20 @@
 }
 
 .mobileTile img {
-    height: 95%;
+    border: 1px solid pink;
+    height: 90%;
     width: 100%;
     object-fit: cover;
     border-radius: 30px;
 }
+
+.mobileTile .tileDetails {
+    text-decoration: underline;
+    color: inherit; /* Keep the original text color */
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.mobileTile .tileDetails:hover {
+    color: blue; /* Change text color to blue on hover */
+}
+

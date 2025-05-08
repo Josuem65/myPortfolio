@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.e081f0e5.css",
-    "main.js": "/static/js/main.4d923425.js",
+    "main.css": "/static/css/main.122f334c.css",
+    "main.js": "/static/js/main.721a47d4.js",
     "static/js/488.5dc00adb.chunk.js": "/static/js/488.5dc00adb.chunk.js",
     "static/media/skateShop.png": "/static/media/skateShop.9bc040b4598a38168972.png",
     "static/media/linkedInProfilePic_1.jpg": "/static/media/linkedInProfilePic_1.29e353dcc5097439afec.jpg",
@@ -20,12 +20,12 @@
     "static/media/BuyMeACoffeeButton.png": "/static/media/BuyMeACoffeeButton.618c3be91d89f482c8a5.png",
     "static/media/javascriptLogo.png": "/static/media/javascriptLogo.dafbcd7fb56fcfce553c.png",
     "index.html": "/index.html",
-    "main.e081f0e5.css.map": "/static/css/main.e081f0e5.css.map",
-    "main.4d923425.js.map": "/static/js/main.4d923425.js.map",
+    "main.122f334c.css.map": "/static/css/main.122f334c.css.map",
+    "main.721a47d4.js.map": "/static/js/main.721a47d4.js.map",
     "488.5dc00adb.chunk.js.map": "/static/js/488.5dc00adb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e081f0e5.css",
-    "static/js/main.4d923425.js"
+    "static/css/main.122f334c.css",
+    "static/js/main.721a47d4.js"
   ]
 }
