@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.122f334c.css",
+    "main.css": "/static/css/main.e537f68b.css",
     "main.js": "/static/js/main.721a47d4.js",
     "static/js/488.5dc00adb.chunk.js": "/static/js/488.5dc00adb.chunk.js",
     "static/media/skateShop.png": "/static/media/skateShop.9bc040b4598a38168972.png",
@@ -20,12 +20,12 @@
     "static/media/BuyMeACoffeeButton.png": "/static/media/BuyMeACoffeeButton.618c3be91d89f482c8a5.png",
     "static/media/javascriptLogo.png": "/static/media/javascriptLogo.dafbcd7fb56fcfce553c.png",
     "index.html": "/index.html",
-    "main.122f334c.css.map": "/static/css/main.122f334c.css.map",
+    "main.e537f68b.css.map": "/static/css/main.e537f68b.css.map",
     "main.721a47d4.js.map": "/static/js/main.721a47d4.js.map",
     "488.5dc00adb.chunk.js.map": "/static/js/488.5dc00adb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.122f334c.css",
+    "static/css/main.e537f68b.css",
     "static/js/main.721a47d4.js"
   ]
 }
