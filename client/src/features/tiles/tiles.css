@@ -141,12 +141,12 @@
     aspect-ratio: 9 / 19; /* Define the aspect ratio */
     margin: auto 1.7em;
     color: rgb(228, 228, 228);
-    border: 1px solid rgb(77, 77, 180);
+    /* border: 1px solid rgb(77, 77, 180); */
     scroll-behavior: smooth;
 }
 
 .mobileTile p {
-    border: 1px dashed gray;
+    /* border: 1px dashed gray; */
     height: 5%;
 }
 
