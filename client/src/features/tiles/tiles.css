@@ -151,7 +151,6 @@
 }
 
 .mobileTile img {
-    border: 1px solid pink;
     height: 90%;
     width: 100%;
     object-fit: cover;
@@ -159,12 +158,13 @@
 }
 
 .mobileTile .tileDetails {
+    visibility: hidden; /*      R E M O V E   'V I S I B I L I T Y'   P R O P E R T Y!!!!!!!!!!!!   */
     text-decoration: underline;
-    color: inherit; /* Keep the original text color */
-    transition: color 0.3s ease; /* Smooth transition for color change */
+    color: inherit;
+    transition: color 0.3s ease;
 }
 
 .mobileTile .tileDetails:hover {
-    color: blue; /* Change text color to blue on hover */
+    color: blue; 
 }
 
