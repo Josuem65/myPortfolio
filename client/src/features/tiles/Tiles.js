@@ -104,7 +104,7 @@ console.log('isMobileOnly', isMobileOnly)
             key={item.id}>
             <p>{item.name}</p>
             <img className={'tileImg'} src={item.image} />
-            <p className="tileDetails">Details</p>
+            {/* <p className="tileDetails">Details</p> */}
           </div>
         })}
       </div>
