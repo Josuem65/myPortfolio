@@ -9,7 +9,8 @@
   top: 3.5em; /* Stick to the top of the viewport */
   margin-top: 3em;
   width: auto;
-  height: 100vh;
+  height: 100vh; /* Ensure a defined height */
+  /* overflow: visible; Ensure parent elements do not block sticky behavior // T E S T I N G   O U T */
 }
 
 /* make contentTile img stay contained within its parent div, contentImg's parent is .content*/

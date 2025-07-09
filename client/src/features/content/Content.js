@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import stickybits from 'stickybits'; // Import stickybits
 import contentMedia from '../../contentImgs.js';
 
 export function Content() {
@@ -17,6 +18,7 @@ export function Content() {
     };
 
     window.addEventListener('scroll', handleScroll);
+    stickybits('.contentMain', { stickyBitStickyOffset: 3.5 * 16 }); // Add stickybits with top offset of 3.5em
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
